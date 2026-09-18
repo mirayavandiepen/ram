@@ -16,7 +16,7 @@ pnpm build      # library, then docs
 pnpm typecheck
 ```
 
-The docs consume the library through its built `dist`, so the library builds first. In `pnpm dev` both run side by side.
+The docs consume the library through its built `dist`, so the library builds first. In `pnpm dev` both run side by side, and `pnpm typecheck` needs a `pnpm build` behind it on a clean checkout.
 
 ## Releasing
 
