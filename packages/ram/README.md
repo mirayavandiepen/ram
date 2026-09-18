@@ -1,6 +1,6 @@
 # ram
 
-**Ram** (Swedish for "frame", pronounced *rahm*) is a tiny React component for animated design-tool selection frames around text.
+**Ram** (Swedish for "frame", pronounced _rahm_) is a tiny React component for animated design-tool selection frames around text.
 
 Wrap a word and it gets a hairline outline, four corner handles and a live `width × height` label, with a short letter-spacing pass that never moves the text around it.
 
@@ -24,22 +24,22 @@ Zero dependencies. Inherits the parent's typography. Respects `prefers-reduced-m
 
 ## Props
 
-| Prop            | Type                                          | Default      |
-| --------------- | --------------------------------------------- | ------------ |
-| `children`      | `ReactNode`                                   | required     |
-| `delay`         | `number` (ms)                                 | `0`          |
-| `duration`      | `number` (ms)                                 | `1400`       |
-| `holdDuration`  | `number` (ms)                                 | `1200`       |
-| `label`         | `boolean \| (size) => string`                 | `true`       |
-| `labelPosition` | `"top" \| "bottom" \| "top-left" \| …`        | `"top"`      |
-| `handles`       | `boolean`                                     | `true`       |
-| `animation`     | `"tracking" \| "static"`                      | `"tracking"` |
-| `trigger`       | `"mount" \| "hover" \| "click" \| "manual"`   | `"mount"`    |
-| `active`        | `boolean`                                     |              |
-| `persistent`    | `boolean`                                     | `false`      |
-| `color`         | `string`                                      |              |
-| `onStart`       | `() => void`                                  |              |
-| `onComplete`    | `() => void`                                  |              |
+| Prop            | Type                                        | Default      |
+| --------------- | ------------------------------------------- | ------------ |
+| `children`      | `ReactNode`                                 | required     |
+| `delay`         | `number` (ms)                               | `0`          |
+| `duration`      | `number` (ms)                               | `1400`       |
+| `holdDuration`  | `number` (ms)                               | `1200`       |
+| `label`         | `boolean \| (size) => string`               | `true`       |
+| `labelPosition` | `"top" \| "bottom" \| "top-left" \| …`      | `"top"`      |
+| `handles`       | `boolean`                                   | `true`       |
+| `animation`     | `"tracking" \| "static"`                    | `"tracking"` |
+| `trigger`       | `"mount" \| "hover" \| "click" \| "manual"` | `"mount"`    |
+| `active`        | `boolean`                                   |              |
+| `persistent`    | `boolean`                                   | `false`      |
+| `color`         | `string`                                    |              |
+| `onStart`       | `() => void`                                |              |
+| `onComplete`    | `() => void`                                |              |
 
 ## CSS variables
 
