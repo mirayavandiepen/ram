@@ -24,7 +24,7 @@ export function Position() {
     <Section
       id="position"
       title="Label position"
-      description="Centred positions stay pinned to the resting centre of the box while the text breathes, so the number never slides."
+      description="Centred positions stay pinned to the resting centre of the frame while the text breathes, so the number never slides."
     >
       <Segmented value={position} onChange={setPosition} options={POSITIONS} />
       <Preview resetKey={position}>

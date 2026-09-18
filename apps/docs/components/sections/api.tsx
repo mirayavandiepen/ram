@@ -1,13 +1,13 @@
 import { Section } from "../section";
 
 const PROPS: [name: string, type: string, description: string][] = [
-  ["children", "ReactNode", "The text to mark. Required."],
-  ["delay", "number", "Milliseconds to wait before the box appears. Defaults to 0."],
+  ["children", "ReactNode", "The text to frame. Required."],
+  ["delay", "number", "Milliseconds to wait before the frame appears. Defaults to 0."],
   ["duration", "number", "Length of the tracking pass in milliseconds. Defaults to 1400."],
   [
     "holdDuration",
     "number",
-    "How long the box holds before leaving, in milliseconds. Defaults to 1200.",
+    "How long the frame holds before leaving, in milliseconds. Defaults to 1200.",
   ],
   [
     "label",
@@ -23,7 +23,7 @@ const PROPS: [name: string, type: string, description: string][] = [
   [
     "animation",
     `"tracking" | "static"`,
-    `Whether the letter-spacing breathes while the box is up. Defaults to "tracking".`,
+    `Whether the letter-spacing breathes while the frame is up. Defaults to "tracking".`,
   ],
   [
     "trigger",
@@ -31,12 +31,12 @@ const PROPS: [name: string, type: string, description: string][] = [
     `What starts the sequence. Defaults to "mount", or "manual" when active is set.`,
   ],
   ["active", "boolean", "Controlled visibility. Implies trigger=\"manual\"."],
-  ["persistent", "boolean", "Keep the box on the page instead of leaving after the hold."],
+  ["persistent", "boolean", "Keep the frame on the page instead of leaving after the hold."],
   ["color", "string", "Colour of the outline, handles and label. Any CSS colour."],
   ["className", "string", "Applied to the wrapping span."],
   ["style", "CSSProperties", "Applied to the wrapping span. A good place for CSS variables."],
-  ["onStart", "() => void", "Called when the box starts to appear."],
-  ["onComplete", "() => void", "Called when the box has left, or has settled when persistent."],
+  ["onStart", "() => void", "Called when the frame starts to appear."],
+  ["onComplete", "() => void", "Called when the frame has left, or has settled when persistent."],
 ];
 
 export function Api() {

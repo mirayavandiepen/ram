@@ -29,7 +29,7 @@ export function Trigger() {
     <Section
       id="trigger"
       title="Trigger"
-      description="Decide when the sequence plays. On mount is the default; hover and click need nothing else wired up, and a controlled box follows a boolean."
+      description="Decide when the sequence plays. On mount is the default; hover and click need nothing else wired up, and a controlled frame follows a boolean."
     >
       <Segmented
         value={trigger}

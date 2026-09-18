@@ -35,7 +35,7 @@ export function Appearance() {
     <Section
       id="appearance"
       title="Appearance"
-      description="Every part of the box is optional. Monochrome by default, in whatever colour the text already is."
+      description="Every part of the frame is optional. Monochrome by default, in whatever colour the text already is."
     >
       <Segmented
         value={variant}

@@ -8,7 +8,7 @@ export function Accessibility() {
         <li>The wrapped text stays ordinary text: selectable, searchable, and read exactly as written.</li>
         <li>
           <code className="font-mono text-[13px] text-foreground">prefers-reduced-motion</code>{" "}
-          drops the tracking pass. The box still fades in and out.
+          drops the tracking pass. The frame still fades in and out.
         </li>
         <li>Ram adds no headings, landmarks or roles, so the semantics of the surrounding markup are unchanged.</li>
       </ul>

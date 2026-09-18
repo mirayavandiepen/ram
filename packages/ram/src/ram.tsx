@@ -95,7 +95,7 @@ const RESIZE_EPSILON = 0.5;
 const DEFAULT_INSET = 4;
 
 type Measurement = RamSize & {
-  /** How far the box extends past the line box on each side. */
+  /** How far the frame extends past the line box on each side. */
   bleed: number;
   /** Resolved `--ram-inset`, in px. */
   inset: number;
@@ -309,7 +309,7 @@ type ControllerArgs = {
 /**
  * The sequence, as imperative work against the DOM. Kept outside React state
  * because every frame of the tracking pass would otherwise be a re-render,
- * and the box only needs React for its initial placement.
+ * and the frame only needs React for its initial placement.
  */
 function createController({
   rootRef,
@@ -591,7 +591,7 @@ const outlineStyle: CSSProperties = {
   opacity: "var(--ram-outline-opacity, 0.6)",
 };
 
-/** Solid, and the only part of the box at full strength: these are what you would grab. */
+/** Solid, and the only part of the frame at full strength: these are what you would grab. */
 const handleStyle: CSSProperties = {
   position: "absolute",
   width: HANDLE_SIZE,
@@ -629,7 +629,7 @@ const badgeTextStyle: CSSProperties = {
  * Centred positions are pinned to the outline's resting centre in px rather
  * than to `50%`. A percentage resolves against the layer, which is as wide as
  * the text currently is, so the label would slide back and forth for the
- * whole pass. The measurement is taken at rest and holds still while the box
+ * whole pass. The measurement is taken at rest and holds still while the frame
  * breathes.
  */
 function labelPlacement(
