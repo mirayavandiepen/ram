@@ -1,0 +1,42 @@
+{
+  "name": "kerned",
+  "version": "0.1.0",
+  "description": "A design-tool selection effect for React. Wrap a word, get an outline, handles and a live width × height label.",
+  "license": "MIT",
+  "author": "Miraya",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/miraya/kerned"
+  },
+  "keywords": ["react", "animation", "selection", "figma", "typography", "letter-spacing"],
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.0"
+  }
+}
