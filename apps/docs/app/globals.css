@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light dark;
+  --background: #ffffff;
+  --foreground: #111111;
+  --muted: #6f6f6f;
+  --faint: #a3a3a3;
+  --border: #eaeaea;
+  --border-strong: #d4d4d4;
+  --code-bg: #fafafa;
+  --surface: #ffffff;
+  --surface-hover: #f5f5f5;
+  --primary: #111111;
+  --primary-foreground: #ffffff;
+
+  --tok-keyword: #6b5db5;
+  --tok-string: #2f7a58;
+  --tok-tag: #b5473f;
+  --tok-attr: #8a5a17;
+  --tok-comment: #9a9a9a;
+  --tok-punct: #7a7a7a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --muted: #8f8f8f;
+    --faint: #5c5c5c;
+    --border: #232323;
+    --border-strong: #333333;
+    --code-bg: #111111;
+    --surface: #0f0f0f;
+    --surface-hover: #1a1a1a;
+    --primary: #ededed;
+    --primary-foreground: #0a0a0a;
+
+    --tok-keyword: #a99ce6;
+    --tok-string: #7fc9a2;
+    --tok-tag: #e8867f;
+    --tok-attr: #d9a85a;
+    --tok-comment: #6a6a6a;
+    --tok-punct: #8c8c8c;
+  }
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-code-bg: var(--code-bg);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+}
+
+html {
+  background: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--foreground) 12%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.tok-keyword { color: var(--tok-keyword); }
+.tok-string { color: var(--tok-string); }
+.tok-tag { color: var(--tok-tag); }
+.tok-attr { color: var(--tok-attr); }
+.tok-comment { color: var(--tok-comment); font-style: italic; }
+.tok-punct { color: var(--tok-punct); }
