@@ -24,7 +24,7 @@ export function Styling() {
       description="Kerned inherits everything typographic from its parent. It sets no font size, family, weight or line height of its own, so it drops into any heading and follows it at every breakpoint."
     >
       <Preview>
-        <div className="flex flex-col items-center gap-5">
+        <div className="flex flex-col items-center gap-12">
           <Sample size="sm" weight="normal">
             built to <Kerned delay={200} persistent>delight</Kerned>
           </Sample>

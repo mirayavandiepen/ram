@@ -7,3 +7,4 @@ out
 .env*
 !.env.example
 .reference
+next-env.d.ts
