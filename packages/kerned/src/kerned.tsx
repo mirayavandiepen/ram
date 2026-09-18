@@ -146,6 +146,7 @@ export function Kerned({
   const textRef = useRef<HTMLSpanElement>(null);
   const layerRef = useRef<HTMLSpanElement>(null);
   const badgeRef = useRef<HTMLSpanElement>(null);
+  const badgeTextRef = useRef<HTMLSpanElement>(null);
 
   const [measurement, setMeasurement] = useState<Measurement | null>(null);
 
@@ -181,6 +182,7 @@ export function Kerned({
       textRef,
       layerRef,
       badgeRef,
+      badgeTextRef,
       latest,
       setMeasurement,
     });
@@ -271,7 +273,12 @@ export function Kerned({
               ...labelPlacement(labelPosition, measurement),
             }}
           >
-            {labelText}
+            {/* The shell takes its background from the layer's colour via
+                currentColor, so the text colour has to live one level down:
+                on the same element it would resolve against itself. */}
+            <span ref={badgeTextRef} style={badgeTextStyle}>
+              {labelText}
+            </span>
           </span>
         ) : null}
       </span>
@@ -284,6 +291,7 @@ type ControllerArgs = {
   textRef: RefObject<HTMLSpanElement | null>;
   layerRef: RefObject<HTMLSpanElement | null>;
   badgeRef: RefObject<HTMLSpanElement | null>;
+  badgeTextRef: RefObject<HTMLSpanElement | null>;
   latest: MutableRefObject<{
     delay: number;
     duration: number;
@@ -308,6 +316,7 @@ function createController({
   textRef,
   layerRef,
   badgeRef,
+  badgeTextRef,
   latest,
   setMeasurement,
 }: ControllerArgs) {
@@ -399,8 +408,9 @@ function createController({
     // shifts by half a digit when it does. One layout read, taken here on the
     // beat rather than anywhere near the per-frame path.
     const badge = badgeRef.current;
-    if (badge) {
-      badge.textContent = formatLabel(rest);
+    const badgeText = badgeTextRef.current;
+    if (badge && badgeText) {
+      badgeText.textContent = formatLabel(rest);
       badge.style.width = "";
       badge.style.width = `${badge.getBoundingClientRect().width}px`;
     }
@@ -427,7 +437,7 @@ function createController({
       // ran, a late webfont swap being the one that actually happens.
       observer = new ResizeObserver(() => {
         const next = measure();
-        if (next && badge) badge.textContent = formatLabel(next);
+        if (next && badgeText) badgeText.textContent = formatLabel(next);
       });
       observer.observe(root);
 
@@ -458,8 +468,8 @@ function createController({
           // changes and nothing around the text moves.
           root.style.marginRight = `${-delta}px`;
           // Predicted, never measured: no layout read on the per-frame path.
-          if (badge) {
-            badge.textContent = formatLabel({
+          if (badgeText) {
+            badgeText.textContent = formatLabel({
               width: rest.width + delta,
               height: rest.height,
             });
@@ -597,17 +607,22 @@ const HANDLE_STYLES: CSSProperties[] = [
 
 const badgeStyle: CSSProperties = {
   position: "absolute",
+  display: "block",
   boxSizing: "border-box",
   padding: "1px 5px",
   borderRadius: 3,
   background: "var(--kerned-label-background, currentColor)",
-  color: "var(--kerned-label-color, light-dark(#fff, #111))",
   fontSize: "var(--kerned-label-font-size, 11px)",
   fontWeight: 500,
   lineHeight: 1.3,
   fontVariantNumeric: "tabular-nums",
   whiteSpace: "nowrap",
   textAlign: "center",
+};
+
+const badgeTextStyle: CSSProperties = {
+  display: "block",
+  color: "var(--kerned-label-color, light-dark(#fff, #111))",
 };
 
 /**
