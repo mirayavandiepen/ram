@@ -19,7 +19,11 @@ import {
   keyframes,
   tween,
 } from "./animate";
-import { contentOverhang, countCharacters, prefersReducedMotion } from "./metrics";
+import {
+  contentOverhang,
+  countCharacters,
+  prefersReducedMotion,
+} from "./metrics";
 
 export type RamSize = {
   /** Rendered width of the content, in px. */
@@ -29,12 +33,7 @@ export type RamSize = {
 };
 
 export type RamLabelPosition =
-  | "top"
-  | "bottom"
-  | "top-left"
-  | "top-right"
-  | "bottom-left"
-  | "bottom-right";
+  "top" | "bottom" | "top-left" | "top-right" | "bottom-left" | "bottom-right";
 
 export type RamAnimation = "tracking" | "static";
 
@@ -87,7 +86,7 @@ const TRACKING_EASES = [EASE_IN_OUT, EASE_IN_OUT, EASE_OUT].map(cubicBezier);
 const FADE_IN = 240;
 /** The tracking pass starts this many ms before the fade finishes. */
 const TRACKING_LEAD = 120;
-const FADE_OUT = 320;
+const FADE_OUT = 200;
 
 /** Sub-pixel churn is not a resize, and re-rendering on it would never settle. */
 const RESIZE_EPSILON = 0.5;
@@ -644,6 +643,8 @@ function labelPlacement(
   if (position.endsWith("-right")) return { ...vertical, right: 0 };
 
   const centre =
-    measurement === null ? "50%" : (measurement.width + measurement.inset * 2) / 2;
+    measurement === null
+      ? "50%"
+      : (measurement.width + measurement.inset * 2) / 2;
   return { ...vertical, left: centre, transform: "translateX(-50%)" };
 }

@@ -18,6 +18,7 @@
   --surface: #ffffff;
   --surface-hover: #f5f5f5;
   --primary: #111111;
+  --primary-hover: #2e2e2e;
   --primary-foreground: #ffffff;
 
   --tok-keyword: #6b5db5;
@@ -40,6 +41,7 @@
   --surface: #0f0f0f;
   --surface-hover: #1a1a1a;
   --primary: #ededed;
+  --primary-hover: #cfcfcf;
   --primary-foreground: #0a0a0a;
 
   --tok-keyword: #a99ce6;
@@ -51,8 +53,15 @@
 }
 
 @theme inline {
+  /* Entering, leaving and colour changes. Tailwind's default transition curve
+     is an ease-in-out, which starts slow and so delays the exact moment the
+     pointer is watching for. */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  /* Press. Short, and settles without overshooting under the finger. */
+  --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-mono:
+    var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
@@ -63,7 +72,24 @@
   --color-surface: var(--surface);
   --color-surface-hover: var(--surface-hover);
   --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
   --color-primary-foreground: var(--primary-foreground);
+}
+
+/**
+ * One transition for every interactive control. Colour and press share a
+ * curve and a duration, so a control never animates in two voices, and a
+ * second `transition-*` utility on the same element cannot silently replace
+ * the first. Named properties, never `all`.
+ */
+@utility control {
+  /* `scale`, `translate` and `rotate` are separate properties in Tailwind v4,
+     so a list naming only `transform` leaves the press silently un-animated. */
+  transition-property:
+    color, background-color, border-color, opacity, transform, translate, scale,
+    rotate;
+  transition-duration: 150ms;
+  transition-timing-function: var(--ease-out-quart);
 }
 
 html {
@@ -97,9 +123,22 @@ body {
   border-radius: 6px;
 }
 
-.tok-keyword { color: var(--tok-keyword); }
-.tok-string { color: var(--tok-string); }
-.tok-tag { color: var(--tok-tag); }
-.tok-attr { color: var(--tok-attr); }
-.tok-comment { color: var(--tok-comment); font-style: italic; }
-.tok-punct { color: var(--tok-punct); }
+.tok-keyword {
+  color: var(--tok-keyword);
+}
+.tok-string {
+  color: var(--tok-string);
+}
+.tok-tag {
+  color: var(--tok-tag);
+}
+.tok-attr {
+  color: var(--tok-attr);
+}
+.tok-comment {
+  color: var(--tok-comment);
+  font-style: italic;
+}
+.tok-punct {
+  color: var(--tok-punct);
+}

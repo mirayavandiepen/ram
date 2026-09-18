@@ -1,5 +1,7 @@
 "use client";
 
+import { PRESS } from "./press";
+
 export type Option<T extends string> = { value: T; label?: string };
 
 export function Segmented<T extends string>({
@@ -16,7 +18,9 @@ export function Segmented<T extends string>({
   return (
     <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
       {label ? (
-        <span className="w-[72px] shrink-0 text-[13px] text-muted">{label}</span>
+        <span className="text-muted w-[72px] shrink-0 text-[13px]">
+          {label}
+        </span>
       ) : null}
       <div role="group" aria-label={label} className="flex flex-wrap gap-1.5">
         {options.map((option) => {
@@ -30,7 +34,8 @@ export function Segmented<T extends string>({
               aria-pressed={selected}
               onClick={() => onChange(item.value)}
               className={[
-                "h-7 rounded-full border px-3 text-[13px] leading-none transition-colors duration-150",
+                "h-7 rounded-full border px-3 text-[13px] leading-none",
+                PRESS,
                 selected
                   ? "border-primary bg-primary text-primary-foreground"
                   : "border-border bg-surface text-foreground hover:bg-surface-hover",

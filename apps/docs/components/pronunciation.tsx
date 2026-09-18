@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 
 import { site } from "@/lib/site";
 
+import { HIT_AREA, PRESS } from "./press";
+
 /**
  * The name, said out loud. Speech synthesis rather than a recording: one
  * syllable does not earn an audio asset, a request and a licence, and asking
@@ -46,7 +48,9 @@ export function Pronunciation() {
     utterance.lang = "sv-SE";
     const swedish = synth
       .getVoices()
-      .find((voice) => voice.lang.replace("_", "-").toLowerCase().startsWith("sv"));
+      .find((voice) =>
+        voice.lang.replace("_", "-").toLowerCase().startsWith("sv"),
+      );
     if (swedish) utterance.voice = swedish;
     // A single short word runs past before it registers at full speed.
     utterance.rate = 0.85;
@@ -66,7 +70,7 @@ export function Pronunciation() {
       type="button"
       onClick={speak}
       aria-label={`Hear how ${site.name} is pronounced`}
-      className={`ml-[3px] inline-grid size-4 translate-y-[3px] place-items-center rounded transition-colors ${
+      className={`ml-[3px] inline-grid size-4 translate-y-[3px] place-items-center rounded ${HIT_AREA} ${PRESS} ${
         speaking ? "text-foreground" : "text-faint hover:text-foreground"
       }`}
     >

@@ -2,6 +2,8 @@
 
 import { type ReactNode, useEffect, useRef, useState } from "react";
 
+import { HIT_AREA, PRESS } from "./press";
+
 /**
  * A bordered stage for a live example. The children are remounted to replay
  * the frame: on a change of `resetKey`, on the replay button, and once when
@@ -49,7 +51,7 @@ export function Preview({
   return (
     <div
       ref={stageRef}
-      className={`relative flex min-h-[168px] items-center justify-center overflow-hidden rounded-lg border border-border bg-surface px-6 py-10 ${className}`}
+      className={`border-border bg-surface relative flex min-h-[168px] items-center justify-center overflow-hidden rounded-lg border px-6 py-10 ${className}`}
     >
       <div key={`${resetKey}:${run}:${seen}`} className="contents">
         {children}
@@ -59,11 +61,28 @@ export function Preview({
           type="button"
           aria-label="Replay"
           onClick={() => setRun((n) => n + 1)}
-          className="absolute top-2 right-2 grid size-7 place-items-center rounded-md text-muted transition-colors hover:bg-surface-hover hover:text-foreground"
+          className={`text-muted hover:bg-surface-hover hover:text-foreground absolute right-2 top-2 grid size-7 place-items-center rounded-md ${HIT_AREA} ${PRESS}`}
         >
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M13 8A5 5 0 1 1 8 3h1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            <path d="M8 1l2.5 2L8 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 16 16"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M13 8A5 5 0 1 1 8 3h1.5"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+            />
+            <path
+              d="M8 1l2.5 2L8 5"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </button>
       ) : null}
@@ -93,7 +112,7 @@ export function Sample({
   };
   return (
     <p
-      className={`${sizes[size]} ${weights[weight]} leading-none tracking-[-0.02em] whitespace-nowrap`}
+      className={`${sizes[size]} ${weights[weight]} whitespace-nowrap leading-none tracking-[-0.02em]`}
     >
       {children}
     </p>

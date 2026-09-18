@@ -2,6 +2,8 @@
 
 import { type ThemeMode, useTheme } from "@/lib/theme";
 
+import { PRESS } from "./press";
+
 const OPTIONS: { mode: ThemeMode; label: string; icon: React.ReactNode }[] = [
   {
     mode: "system",
@@ -37,7 +39,7 @@ export function ThemeToggle() {
     <div
       role="group"
       aria-label="Theme"
-      className="flex items-center gap-0.5 rounded-full border border-border bg-surface/80 p-0.5 backdrop-blur-sm"
+      className="border-border bg-surface flex items-center gap-0.5 rounded-full border p-0.5 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_4px_12px_rgba(0,0,0,0.06)]"
     >
       {OPTIONS.map((option) => {
         const selected = ready && option.mode === mode;
@@ -50,7 +52,8 @@ export function ThemeToggle() {
             aria-pressed={selected}
             onClick={() => setMode(option.mode)}
             className={[
-              "grid size-6 place-items-center rounded-full transition-colors duration-150",
+              "grid size-7 place-items-center rounded-full",
+              PRESS,
               selected
                 ? "bg-surface-hover text-foreground"
                 : "text-faint hover:text-foreground",
