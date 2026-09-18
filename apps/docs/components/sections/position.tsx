@@ -35,7 +35,7 @@ export function Position() {
           </Ram>
         </Sample>
       </Preview>
-      <Code>{`<Ram labelPosition="${position}">delight</Ram>`}</Code>
+      <Code label="tsx">{`<Ram labelPosition="${position}">delight</Ram>`}</Code>
     </Section>
   );
 }

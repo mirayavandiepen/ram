@@ -71,7 +71,7 @@ export function Trigger() {
           </div>
         )}
       </Preview>
-      <Code>{CODE[trigger]}</Code>
+      <Code label="tsx">{CODE[trigger]}</Code>
     </Section>
   );
 }

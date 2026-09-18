@@ -53,7 +53,7 @@ export function Appearance() {
           </Ram>
         </Sample>
       </Preview>
-      <Code>{current.code}</Code>
+      <Code label="tsx">{current.code}</Code>
     </Section>
   );
 }

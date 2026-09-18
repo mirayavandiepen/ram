@@ -52,55 +52,58 @@ export function Install() {
   };
 
   return (
-    <div className="border-border bg-code-bg rounded-lg border">
-      <div
-        role="tablist"
-        aria-label="Package manager"
-        onKeyDown={onKeyDown}
-        className="border-border flex gap-1 border-b px-2 pt-1.5"
-      >
-        {MANAGERS.map((manager, index) => {
-          const selected = manager.name === active;
-          return (
-            <button
-              key={manager.name}
-              ref={(node) => {
-                tabs.current[index] = node;
-              }}
-              role="tab"
-              type="button"
-              id={`install-tab-${manager.name}`}
-              aria-controls="install-panel"
-              aria-selected={selected}
-              tabIndex={selected ? 0 : -1}
-              onClick={() => setActive(manager.name)}
-              className={[
-                "-mb-px border-b px-2 pb-2 pt-1 text-[13px]",
-                PRESS,
-                selected
-                  ? "border-foreground text-foreground"
-                  : "text-muted hover:text-foreground border-transparent",
-              ].join(" ")}
-            >
-              {manager.name}
-            </button>
-          );
-        })}
-      </div>
-      <div className="relative">
-        {/* Focusable because it scrolls: a region a pointer can pan but a
- keyboard cannot reach is content behind a wall. */}
-        <pre
-          id="install-panel"
-          role="tabpanel"
-          aria-labelledby={`install-tab-${active}`}
-          tabIndex={0}
-          className="overflow-x-auto p-4 pr-12 font-mono text-[13px] leading-[1.7]"
+    <div className="border-border bg-code-bg overflow-hidden rounded-lg border">
+      {/* The package managers already form a bar across the top of the block,
+          so the copy control joins them at the far end rather than floating
+          over the command itself. */}
+      <div className="border-border flex h-9 items-center justify-between gap-3 border-b pr-1.5">
+        <div
+          role="tablist"
+          aria-label="Package manager"
+          onKeyDown={onKeyDown}
+          className="flex h-full min-w-0 items-center gap-1 overflow-x-auto px-1.5"
         >
-          <code>{current.command}</code>
-        </pre>
-        <CopyButton text={current.command} className="absolute right-2 top-2" />
+          {MANAGERS.map((manager, index) => {
+            const selected = manager.name === active;
+            return (
+              <button
+                key={manager.name}
+                ref={(node) => {
+                  tabs.current[index] = node;
+                }}
+                role="tab"
+                type="button"
+                id={`install-tab-${manager.name}`}
+                aria-controls="install-panel"
+                aria-selected={selected}
+                tabIndex={selected ? 0 : -1}
+                onClick={() => setActive(manager.name)}
+                className={[
+                  "h-6 shrink-0 rounded-md px-2 font-mono text-[12px] leading-none",
+                  PRESS,
+                  selected
+                    ? "bg-surface-hover text-foreground"
+                    : "text-faint hover:text-foreground",
+                ].join(" ")}
+              >
+                {manager.name}
+              </button>
+            );
+          })}
+        </div>
+        <CopyButton text={current.command} />
       </div>
+      {/* Focusable because it scrolls: a region a pointer can pan but a
+          keyboard cannot reach is content behind a wall. */}
+      <pre
+        id="install-panel"
+        role="tabpanel"
+        aria-labelledby={`install-tab-${active}`}
+        tabIndex={0}
+        className="overflow-x-auto p-4 font-mono text-[13px] leading-[1.7]"
+      >
+        <code>{current.command}</code>
+      </pre>
     </div>
   );
 }

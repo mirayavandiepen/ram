@@ -16,7 +16,7 @@ export function Usage() {
           built to <Ram delay={300}>delight</Ram>
         </Sample>
       </Preview>
-      <Code>{`
+      <Code label="example.tsx">{`
 import { Ram } from "ram";
 
 export default function Example() {

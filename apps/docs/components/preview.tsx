@@ -61,7 +61,7 @@ export function Preview({
           type="button"
           aria-label="Replay"
           onClick={() => setRun((n) => n + 1)}
-          className={`text-muted hover:bg-surface-hover hover:text-foreground absolute right-2 top-2 grid size-7 place-items-center rounded-md ${HIT_AREA} ${PRESS}`}
+          className={`text-faint hover:bg-surface-hover hover:text-foreground absolute right-2 top-2 grid size-7 place-items-center rounded-md ${HIT_AREA} ${PRESS}`}
         >
           <svg
             width="14"

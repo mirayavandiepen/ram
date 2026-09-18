@@ -81,7 +81,7 @@ export function Animation() {
           built to <Ram {...props}>delight</Ram>
         </Sample>
       </Preview>
-      <Code>{code}</Code>
+      <Code label="tsx">{code}</Code>
     </Section>
   );
 }

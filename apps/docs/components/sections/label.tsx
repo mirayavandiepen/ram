@@ -41,7 +41,7 @@ export function Label() {
           </Ram>
         </Sample>
       </Preview>
-      <Code>{CODE[option]}</Code>
+      <Code label="tsx">{CODE[option]}</Code>
     </Section>
   );
 }

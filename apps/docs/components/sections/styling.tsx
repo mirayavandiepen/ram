@@ -39,7 +39,7 @@ export function Styling() {
           </Sample>
         </div>
       </Preview>
-      <Code>{`
+      <Code label="example.tsx">{`
 <h1 className="text-5xl font-medium">
   built to <Ram>delight</Ram>
 </h1>
@@ -74,7 +74,7 @@ export function Styling() {
           </Ram>
         </Sample>
       </Preview>
-      <Code>{`
+      <Code label="example.tsx">{`
 <Ram
   style={{
     "--ram-color": "#0d99ff",
