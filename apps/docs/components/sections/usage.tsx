@@ -1,4 +1,4 @@
-import { Kerned } from "kerned";
+import { Ram } from "ram";
 
 import { Code } from "../code";
 import { Preview, Sample } from "../preview";
@@ -9,16 +9,16 @@ export function Usage() {
     <Section id="usage" title="Usage" description="Wrap the text you want to mark.">
       <Preview>
         <Sample>
-          built to <Kerned delay={300}>delight</Kerned>
+          built to <Ram delay={300}>delight</Ram>
         </Sample>
       </Preview>
       <Code>{`
-import { Kerned } from "kerned";
+import { Ram } from "ram";
 
 export default function Example() {
   return (
     <h1>
-      built to <Kerned>delight</Kerned>
+      built to <Ram>delight</Ram>
     </h1>
   );
 }

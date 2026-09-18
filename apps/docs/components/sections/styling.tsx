@@ -1,19 +1,19 @@
-import { Kerned } from "kerned";
+import { Ram } from "ram";
 
 import { Code } from "../code";
 import { Preview, Sample } from "../preview";
 import { Section } from "../section";
 
 const VARIABLES: [string, string][] = [
-  ["--kerned-color", "outline, handles and label. Defaults to currentColor."],
-  ["--kerned-line-width", "1px"],
-  ["--kerned-outline-opacity", "0.6"],
-  ["--kerned-handle-size", "6px"],
-  ["--kerned-inset", "4px, how far the outline sits outside the text"],
-  ["--kerned-label-background", "defaults to the marker colour"],
-  ["--kerned-label-color", "white on light schemes, near-black on dark"],
-  ["--kerned-label-font-size", "11px"],
-  ["--kerned-label-offset", "6px"],
+  ["--ram-color", "outline, handles and label. Defaults to currentColor."],
+  ["--ram-line-width", "1px"],
+  ["--ram-outline-opacity", "0.6"],
+  ["--ram-handle-size", "6px"],
+  ["--ram-inset", "4px, how far the outline sits outside the text"],
+  ["--ram-label-background", "defaults to the frame colour"],
+  ["--ram-label-color", "white on light schemes, near-black on dark"],
+  ["--ram-label-font-size", "11px"],
+  ["--ram-label-offset", "6px"],
 ];
 
 export function Styling() {
@@ -21,21 +21,21 @@ export function Styling() {
     <Section
       id="styling"
       title="Styling"
-      description="Kerned inherits everything typographic from its parent. It sets no font size, family, weight or line height of its own, so it drops into any heading and follows it at every breakpoint."
+      description="Ram inherits everything typographic from its parent. It sets no font size, family, weight or line height of its own, so it drops into any heading and follows it at every breakpoint."
     >
       <Preview>
         <div className="flex flex-col items-center gap-12">
           <Sample size="sm" weight="normal">
-            built to <Kerned delay={200} persistent>delight</Kerned>
+            built to <Ram delay={200} persistent>delight</Ram>
           </Sample>
           <Sample size="lg" weight="semibold">
-            built to <Kerned delay={500} persistent>delight</Kerned>
+            built to <Ram delay={500} persistent>delight</Ram>
           </Sample>
         </div>
       </Preview>
       <Code>{`
 <h1 className="text-5xl font-medium">
-  built to <Kerned>delight</Kerned>
+  built to <Ram>delight</Ram>
 </h1>
 `}</Code>
       <p className="text-[15px] text-muted">
@@ -53,31 +53,31 @@ export function Styling() {
       <Preview>
         <Sample>
           built to{" "}
-          <Kerned
+          <Ram
             delay={200}
             persistent
             style={
               {
-                "--kerned-color": "#0d99ff",
-                "--kerned-handle-size": "8px",
-                "--kerned-inset": "8px",
+                "--ram-color": "#0d99ff",
+                "--ram-handle-size": "8px",
+                "--ram-inset": "8px",
               } as React.CSSProperties
             }
           >
             delight
-          </Kerned>
+          </Ram>
         </Sample>
       </Preview>
       <Code>{`
-<Kerned
+<Ram
   style={{
-    "--kerned-color": "#0d99ff",
-    "--kerned-handle-size": "8px",
-    "--kerned-inset": "8px",
+    "--ram-color": "#0d99ff",
+    "--ram-handle-size": "8px",
+    "--ram-inset": "8px",
   }}
 >
   delight
-</Kerned>
+</Ram>
 `}</Code>
     </Section>
   );

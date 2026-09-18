@@ -1,6 +1,6 @@
 "use client";
 
-import { Kerned, type KernedLabelPosition } from "kerned";
+import { Ram, type RamLabelPosition } from "ram";
 import { useState } from "react";
 
 import { Code } from "../code";
@@ -8,7 +8,7 @@ import { Preview, Sample } from "../preview";
 import { Section } from "../section";
 import { Segmented } from "../segmented";
 
-const POSITIONS: KernedLabelPosition[] = [
+const POSITIONS: RamLabelPosition[] = [
   "top",
   "bottom",
   "top-left",
@@ -18,7 +18,7 @@ const POSITIONS: KernedLabelPosition[] = [
 ];
 
 export function Position() {
-  const [position, setPosition] = useState<KernedLabelPosition>("top");
+  const [position, setPosition] = useState<RamLabelPosition>("top");
 
   return (
     <Section
@@ -30,12 +30,12 @@ export function Position() {
       <Preview resetKey={position}>
         <Sample>
           built to{" "}
-          <Kerned delay={300} persistent labelPosition={position}>
+          <Ram delay={300} persistent labelPosition={position}>
             delight
-          </Kerned>
+          </Ram>
         </Sample>
       </Preview>
-      <Code>{`<Kerned labelPosition="${position}">delight</Kerned>`}</Code>
+      <Code>{`<Ram labelPosition="${position}">delight</Ram>`}</Code>
     </Section>
   );
 }

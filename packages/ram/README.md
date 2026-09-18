@@ -1,18 +1,20 @@
-# kerned
+# ram
 
-A design-tool selection effect for React. Wrap a word and it gets a hairline outline, four corner handles and a live `width × height` label, with a short letter-spacing pass that never moves the text around it.
+**Ram** (Swedish for "frame", pronounced *rahm*) is a tiny React component for animated design-tool selection frames around text.
+
+Wrap a word and it gets a hairline outline, four corner handles and a live `width × height` label, with a short letter-spacing pass that never moves the text around it.
 
 ```bash
-pnpm add kerned
+pnpm add ram
 ```
 
 ```tsx
-import { Kerned } from "kerned";
+import { Ram } from "ram";
 
 export default function Example() {
   return (
     <h1>
-      built to <Kerned>delight</Kerned>
+      built to <Ram>delight</Ram>
     </h1>
   );
 }
@@ -42,17 +44,17 @@ Zero dependencies. Inherits the parent's typography. Respects `prefers-reduced-m
 ## CSS variables
 
 ```css
---kerned-color             /* outline, handles and label; defaults to currentColor */
---kerned-line-width        /* 1px */
---kerned-outline-opacity   /* 0.6 */
---kerned-handle-size       /* 6px */
---kerned-inset             /* 4px, how far the outline sits outside the text */
---kerned-label-background  /* defaults to the marker colour */
---kerned-label-color       /* white on light, near-black on dark */
---kerned-label-font-size   /* 11px */
---kerned-label-offset      /* 6px */
+--ram-color             /* outline, handles and label; defaults to currentColor */
+--ram-line-width        /* 1px */
+--ram-outline-opacity   /* 0.6 */
+--ram-handle-size       /* 6px */
+--ram-inset             /* 4px, how far the outline sits outside the text */
+--ram-label-background  /* defaults to the frame colour */
+--ram-label-color       /* white on light, near-black on dark */
+--ram-label-font-size   /* 11px */
+--ram-label-offset      /* 6px */
 ```
 
-Full documentation and live examples: https://kerned.dev
+Full documentation and live examples: https://ram.dev
 
 MIT

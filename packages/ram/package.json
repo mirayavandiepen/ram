@@ -1,14 +1,22 @@
 {
-  "name": "kerned",
+  "name": "ram",
   "version": "0.1.0",
-  "description": "A design-tool selection effect for React. Wrap a word, get an outline, handles and a live width × height label.",
+  "description": "Swedish for frame. A tiny React component for animated design-tool selection frames around text.",
   "license": "MIT",
   "author": "Miraya",
   "repository": {
     "type": "git",
-    "url": "https://github.com/miraya/kerned"
+    "url": "https://github.com/miraya/ram"
   },
-  "keywords": ["react", "animation", "selection", "figma", "typography", "letter-spacing"],
+  "keywords": [
+    "react",
+    "animation",
+    "selection",
+    "frame",
+    "figma",
+    "typography",
+    "letter-spacing"
+  ],
   "type": "module",
   "sideEffects": false,
   "main": "./dist/index.cjs",
@@ -21,7 +29,10 @@
       "require": "./dist/index.cjs"
     }
   },
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
@@ -38,5 +49,6 @@
     "react-dom": "^19.1.0",
     "tsup": "^8.5.0",
     "typescript": "^5.8.0"
-  }
+  },
+  "homepage": "https://ram.dev"
 }

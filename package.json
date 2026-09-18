@@ -1,10 +1,10 @@
 {
-  "name": "kerned-workspace",
+  "name": "ram-workspace",
   "private": true,
   "packageManager": "pnpm@10.0.0",
   "scripts": {
-    "build": "pnpm --filter kerned build && pnpm --filter docs build",
-    "dev": "pnpm --parallel --filter kerned --filter docs dev",
+    "build": "pnpm --filter ram build && pnpm --filter docs build",
+    "dev": "pnpm --parallel --filter ram --filter docs dev",
     "typecheck": "pnpm -r typecheck",
     "lint": "pnpm -r lint"
   },

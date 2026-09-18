@@ -1,6 +1,6 @@
 "use client";
 
-import { Kerned, type KernedSize } from "kerned";
+import { Ram, type RamSize } from "ram";
 import { useState } from "react";
 
 import { Code } from "../code";
@@ -11,14 +11,14 @@ import { Segmented } from "../segmented";
 const OPTIONS = ["Show", "Hide", "Custom"] as const;
 type Option = (typeof OPTIONS)[number];
 
-const widthOnly = ({ width }: KernedSize) => `w ${Math.round(width)}`;
+const widthOnly = ({ width }: RamSize) => `w ${Math.round(width)}`;
 
 const CODE: Record<Option, string> = {
-  Show: `<Kerned label>delight</Kerned>`,
-  Hide: `<Kerned label={false}>delight</Kerned>`,
-  Custom: `<Kerned label={({ width }) => \`w \${Math.round(width)}\`}>
+  Show: `<Ram label>delight</Ram>`,
+  Hide: `<Ram label={false}>delight</Ram>`,
+  Custom: `<Ram label={({ width }) => \`w \${Math.round(width)}\`}>
   delight
-</Kerned>`,
+</Ram>`,
 };
 
 export function Label() {
@@ -35,9 +35,9 @@ export function Label() {
       <Preview resetKey={option}>
         <Sample>
           built to{" "}
-          <Kerned delay={300} persistent label={label}>
+          <Ram delay={300} persistent label={label}>
             delight
-          </Kerned>
+          </Ram>
         </Sample>
       </Preview>
       <Code>{CODE[option]}</Code>

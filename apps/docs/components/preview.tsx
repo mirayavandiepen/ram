@@ -4,13 +4,13 @@ import { type ReactNode, useEffect, useRef, useState } from "react";
 
 /**
  * A bordered stage for a live example. The children are remounted to replay
- * the marker: on a change of `resetKey`, on the replay button, and once when
+ * the frame: on a change of `resetKey`, on the replay button, and once when
  * the stage first scrolls into view. Without that last one every example below
  * the fold would have played and left before the reader ever reached it.
  *
  * Remounting rather than rendering late means the sample text is on the page
  * the whole time and never pops in. React swaps identical markup, so the only
- * thing the remount actually restarts is the marker's own timeline.
+ * thing the remount actually restarts is the frame's own timeline.
  */
 export function Preview({
   children,

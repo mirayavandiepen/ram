@@ -1,6 +1,6 @@
 "use client";
 
-import { Kerned } from "kerned";
+import { Ram } from "ram";
 import { useState } from "react";
 
 import { Code } from "../code";
@@ -12,12 +12,12 @@ const TRIGGERS = ["mount", "hover", "click", "controlled"] as const;
 type Trigger = (typeof TRIGGERS)[number];
 
 const CODE: Record<Trigger, string> = {
-  mount: `<Kerned trigger="mount">delight</Kerned>`,
-  hover: `<Kerned trigger="hover">hover me</Kerned>`,
-  click: `<Kerned trigger="click">click me</Kerned>`,
+  mount: `<Ram trigger="mount">delight</Ram>`,
+  hover: `<Ram trigger="hover">hover me</Ram>`,
+  click: `<Ram trigger="click">click me</Ram>`,
   controlled: `const [active, setActive] = useState(false);
 
-<Kerned active={active}>delight</Kerned>
+<Ram active={active}>delight</Ram>
 <button onClick={() => setActive((a) => !a)}>Toggle</button>`,
 };
 
@@ -42,23 +42,23 @@ export function Trigger() {
       <Preview resetKey={trigger} replay={trigger === "mount"}>
         {trigger === "mount" ? (
           <Sample>
-            built to <Kerned delay={300}>delight</Kerned>
+            built to <Ram delay={300}>delight</Ram>
           </Sample>
         ) : trigger === "hover" ? (
           <Sample>
-            built to <Kerned trigger="hover">hover me</Kerned>
+            built to <Ram trigger="hover">hover me</Ram>
           </Sample>
         ) : trigger === "click" ? (
           <Sample>
             built to{" "}
-            <Kerned trigger="click" style={{ cursor: "pointer" }}>
+            <Ram trigger="click" style={{ cursor: "pointer" }}>
               click me
-            </Kerned>
+            </Ram>
           </Sample>
         ) : (
           <div className="flex flex-col items-center gap-6">
             <Sample>
-              built to <Kerned active={active}>delight</Kerned>
+              built to <Ram active={active}>delight</Ram>
             </Sample>
             <button
               type="button"

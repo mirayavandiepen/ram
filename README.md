@@ -1,10 +1,12 @@
-# kerned
+# ram
 
-Monorepo for [`kerned`](packages/kerned), a design-tool selection effect for React, and its documentation site.
+Monorepo for [`ram`](packages/ram), a tiny React component for animated design-tool selection frames around text, and its documentation site.
+
+The name is Swedish for "frame".
 
 ```
-packages/kerned   the library, published to npm
-apps/docs         kerned.dev, Next.js
+packages/ram   the library, published to npm
+apps/docs      ram.dev, Next.js
 ```
 
 ## Development
@@ -21,7 +23,7 @@ The docs consume the library through its built `dist`, so the library builds fir
 ## Releasing
 
 ```bash
-cd packages/kerned
+cd packages/ram
 pnpm build
 npm publish
 ```

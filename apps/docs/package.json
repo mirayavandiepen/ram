@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "geist": "^1.7.0",
-    "kerned": "workspace:*",
+    "ram": "workspace:*",
     "next": "^16.3.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0"

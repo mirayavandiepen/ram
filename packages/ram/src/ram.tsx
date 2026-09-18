@@ -21,14 +21,14 @@ import {
 } from "./animate";
 import { contentOverhang, countCharacters, prefersReducedMotion } from "./metrics";
 
-export type KernedSize = {
+export type RamSize = {
   /** Rendered width of the content, in px. */
   width: number;
   /** Height of the font's content area, in px. Taller than the line box for tight leading. */
   height: number;
 };
 
-export type KernedLabelPosition =
+export type RamLabelPosition =
   | "top"
   | "bottom"
   | "top-left"
@@ -36,40 +36,40 @@ export type KernedLabelPosition =
   | "bottom-left"
   | "bottom-right";
 
-export type KernedAnimation = "tracking" | "static";
+export type RamAnimation = "tracking" | "static";
 
-export type KernedTrigger = "mount" | "hover" | "click" | "manual";
+export type RamTrigger = "mount" | "hover" | "click" | "manual";
 
-export type KernedProps = {
-  /** The text to mark. Plain strings track most accurately, but any node works. */
+export type RamProps = {
+  /** The text to frame. Plain strings track most accurately, but any node works. */
   children: ReactNode;
-  /** Milliseconds to wait before the box appears, on every trigger. */
+  /** Milliseconds to wait before the frame appears, on every trigger. */
   delay?: number;
   /** Length of the tracking pass in milliseconds. */
   duration?: number;
-  /** How long the box holds its measurement before leaving, in milliseconds. */
+  /** How long the frame holds its measurement before leaving, in milliseconds. */
   holdDuration?: number;
   /** Show the width × height label, or format it yourself. */
-  label?: boolean | ((size: KernedSize) => string);
+  label?: boolean | ((size: RamSize) => string);
   /** Where the label sits relative to the outline. */
-  labelPosition?: KernedLabelPosition;
+  labelPosition?: RamLabelPosition;
   /** Draw the four corner handles. */
   handles?: boolean;
-  /** `tracking` breathes the letter-spacing while the box is up; `static` only fades. */
-  animation?: KernedAnimation;
+  /** `tracking` breathes the letter-spacing while the frame is up; `static` only fades. */
+  animation?: RamAnimation;
   /** What starts the sequence. Defaults to `manual` when `active` is provided. */
-  trigger?: KernedTrigger;
+  trigger?: RamTrigger;
   /** Controlled visibility. Setting this implies `trigger="manual"`. */
   active?: boolean;
-  /** Keep the box on the page instead of leaving after the hold. */
+  /** Keep the frame on the page instead of leaving after the hold. */
   persistent?: boolean;
   /** Colour of the outline, handles and label. Any CSS colour. */
   color?: string;
   className?: string;
   style?: CSSProperties;
-  /** The box has started to appear. */
+  /** The frame has started to appear. */
   onStart?: () => void;
-  /** The box has left, or, when persistent, has settled. */
+  /** The frame has left, or, when persistent, has settled. */
   onComplete?: () => void;
 };
 
@@ -94,16 +94,16 @@ const RESIZE_EPSILON = 0.5;
 
 const DEFAULT_INSET = 4;
 
-type Measurement = KernedSize & {
+type Measurement = RamSize & {
   /** How far the box extends past the line box on each side. */
   bleed: number;
-  /** Resolved `--kerned-inset`, in px. */
+  /** Resolved `--ram-inset`, in px. */
   inset: number;
 };
 
 type Phase = "hidden" | "pending" | "entering" | "shown" | "leaving";
 
-const formatSize = ({ width, height }: KernedSize) =>
+const formatSize = ({ width, height }: RamSize) =>
   `${Math.round(width)} × ${Math.round(height)}`;
 
 const same = (a: Measurement | null, b: Measurement) =>
@@ -113,7 +113,7 @@ const same = (a: Measurement | null, b: Measurement) =>
   a.inset === b.inset;
 
 /**
- * Draws a design-tool selection box around its children: a hairline outline,
+ * Draws a design-tool selection frame around its children: a hairline outline,
  * four corner handles, and a live `width × height` label.
  *
  * The text is never pinned to a fixed width. Its box grows and shrinks with
@@ -121,7 +121,7 @@ const same = (a: Measurement | null, b: Measurement) =>
  * What is held constant is the width of the line: a compensating margin gives
  * back whatever the tracking took, so nothing else on the line moves.
  */
-export function Kerned({
+export function Ram({
   children,
   delay = 0,
   duration = 1400,
@@ -138,8 +138,8 @@ export function Kerned({
   style,
   onStart,
   onComplete,
-}: KernedProps) {
-  const trigger: KernedTrigger =
+}: RamProps) {
+  const trigger: RamTrigger =
     triggerProp ?? (active === undefined ? "mount" : "manual");
 
   const rootRef = useRef<HTMLSpanElement>(null);
@@ -221,7 +221,7 @@ export function Kerned({
     position: "relative",
     display: "inline-block",
     ...(color !== undefined
-      ? ({ "--kerned-color": color } as CSSProperties)
+      ? ({ "--ram-color": color } as CSSProperties)
       : null),
     ...style,
   };
@@ -236,12 +236,12 @@ export function Kerned({
   return (
     <span
       ref={rootRef}
-      data-kerned=""
+      data-ram=""
       className={className}
       style={rootStyle}
       {...interactions}
     >
-      <span ref={textRef} data-kerned-text="">
+      <span ref={textRef} data-ram-text="">
         {children}
       </span>
       {/* Decoration throughout: out of the accessibility tree, takes no
@@ -251,23 +251,23 @@ export function Kerned({
       <span
         ref={layerRef}
         aria-hidden="true"
-        data-kerned-layer=""
+        data-ram-layer=""
         style={{
           ...layerStyle,
           top: -bleed,
           bottom: -bleed,
         }}
       >
-        <span data-kerned-outline="" style={outlineStyle} />
+        <span data-ram-outline="" style={outlineStyle} />
         {handles
           ? HANDLE_STYLES.map((handle, i) => (
-              <span key={i} data-kerned-handle="" style={handle} />
+              <span key={i} data-ram-handle="" style={handle} />
             ))
           : null}
         {label ? (
           <span
             ref={badgeRef}
-            data-kerned-label=""
+            data-ram-label=""
             style={{
               ...badgeStyle,
               ...labelPlacement(labelPosition, measurement),
@@ -296,9 +296,9 @@ type ControllerArgs = {
     delay: number;
     duration: number;
     holdDuration: number;
-    label: KernedProps["label"];
-    animation: KernedAnimation;
-    trigger: KernedTrigger;
+    label: RamProps["label"];
+    animation: RamAnimation;
+    trigger: RamTrigger;
     persistent: boolean;
     onStart?: () => void;
     onComplete?: () => void;
@@ -325,7 +325,7 @@ function createController({
   const tweens = new Set<Tween>();
   const timers = new Set<number>();
 
-  const formatLabel = (size: KernedSize) => {
+  const formatLabel = (size: RamSize) => {
     const { label } = latest.current;
     return typeof label === "function" ? label(size) : formatSize(size);
   };
@@ -337,7 +337,7 @@ function createController({
     const bleed = contentOverhang(root, rect.height);
     const inset =
       Number.parseFloat(
-        getComputedStyle(root).getPropertyValue("--kerned-inset"),
+        getComputedStyle(root).getPropertyValue("--ram-inset"),
       ) || DEFAULT_INSET;
     const next: Measurement = {
       width: rect.width,
@@ -554,17 +554,17 @@ function createController({
   return { measure, show, hide, toggle, dispose };
 }
 
-const HANDLE_SIZE = "var(--kerned-handle-size, 6px)";
+const HANDLE_SIZE = "var(--ram-handle-size, 6px)";
 /** Each handle is pulled back by half its size so it straddles the corner. */
 const HANDLE_OFFSET = `calc(${HANDLE_SIZE} / -2)`;
 
-const LABEL_OFFSET = "var(--kerned-label-offset, 6px)";
+const LABEL_OFFSET = "var(--ram-label-offset, 6px)";
 
 const layerStyle: CSSProperties = {
   position: "absolute",
-  left: "calc(var(--kerned-inset, 4px) * -1)",
-  right: "calc(var(--kerned-inset, 4px) * -1)",
-  color: "var(--kerned-color, currentColor)",
+  left: "calc(var(--ram-inset, 4px) * -1)",
+  right: "calc(var(--ram-inset, 4px) * -1)",
+  color: "var(--ram-color, currentColor)",
   pointerEvents: "none",
   userSelect: "none",
   opacity: 0,
@@ -587,8 +587,8 @@ const layerStyle: CSSProperties = {
 const outlineStyle: CSSProperties = {
   position: "absolute",
   inset: 0,
-  border: "var(--kerned-line-width, 1px) solid currentColor",
-  opacity: "var(--kerned-outline-opacity, 0.6)",
+  border: "var(--ram-line-width, 1px) solid currentColor",
+  opacity: "var(--ram-outline-opacity, 0.6)",
 };
 
 /** Solid, and the only part of the box at full strength: these are what you would grab. */
@@ -611,8 +611,8 @@ const badgeStyle: CSSProperties = {
   boxSizing: "border-box",
   padding: "1px 5px",
   borderRadius: 3,
-  background: "var(--kerned-label-background, currentColor)",
-  fontSize: "var(--kerned-label-font-size, 11px)",
+  background: "var(--ram-label-background, currentColor)",
+  fontSize: "var(--ram-label-font-size, 11px)",
   fontWeight: 500,
   lineHeight: 1.3,
   fontVariantNumeric: "tabular-nums",
@@ -622,7 +622,7 @@ const badgeStyle: CSSProperties = {
 
 const badgeTextStyle: CSSProperties = {
   display: "block",
-  color: "var(--kerned-label-color, light-dark(#fff, #111))",
+  color: "var(--ram-label-color, light-dark(#fff, #111))",
 };
 
 /**
@@ -633,7 +633,7 @@ const badgeTextStyle: CSSProperties = {
  * breathes.
  */
 function labelPlacement(
-  position: KernedLabelPosition,
+  position: RamLabelPosition,
   measurement: Measurement | null,
 ): CSSProperties {
   const vertical: CSSProperties = position.startsWith("top")

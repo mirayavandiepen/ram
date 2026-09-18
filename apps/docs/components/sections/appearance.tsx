@@ -1,6 +1,6 @@
 "use client";
 
-import { Kerned } from "kerned";
+import { Ram } from "ram";
 import { useState } from "react";
 
 import { Code } from "../code";
@@ -9,18 +9,18 @@ import { Section } from "../section";
 import { Segmented } from "../segmented";
 
 const VARIANTS = {
-  Default: { code: `<Kerned>delight</Kerned>`, props: {} },
-  "No label": { code: `<Kerned label={false}>delight</Kerned>`, props: { label: false } },
+  Default: { code: `<Ram>delight</Ram>`, props: {} },
+  "No label": { code: `<Ram label={false}>delight</Ram>`, props: { label: false } },
   "No handles": {
-    code: `<Kerned handles={false}>delight</Kerned>`,
+    code: `<Ram handles={false}>delight</Ram>`,
     props: { handles: false },
   },
   "Outline only": {
-    code: `<Kerned label={false} handles={false}>\n  delight\n</Kerned>`,
+    code: `<Ram label={false} handles={false}>\n  delight\n</Ram>`,
     props: { label: false, handles: false },
   },
   "Custom color": {
-    code: `<Kerned color="#7c3aed">delight</Kerned>`,
+    code: `<Ram color="#7c3aed">delight</Ram>`,
     props: { color: "#7c3aed" },
   },
 } as const;
@@ -45,9 +45,9 @@ export function Appearance() {
       <Preview resetKey={variant}>
         <Sample>
           built to{" "}
-          <Kerned delay={300} persistent {...current.props}>
+          <Ram delay={300} persistent {...current.props}>
             delight
-          </Kerned>
+          </Ram>
         </Sample>
       </Preview>
       <Code>{current.code}</Code>

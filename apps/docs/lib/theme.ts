@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 export type ThemeMode = "system" | "light" | "dark";
 
-export const THEME_STORAGE_KEY = "kerned-theme";
+export const THEME_STORAGE_KEY = "ram-theme";
 
 /**
  * Runs in the document head, before anything paints. Any later and the page

@@ -1,6 +1,6 @@
 "use client";
 
-import { Kerned } from "kerned";
+import { Ram } from "ram";
 import { useState } from "react";
 
 import { Code } from "../code";
@@ -39,10 +39,10 @@ export function Animation() {
 
   const code =
     attrs.length === 0
-      ? `<Kerned>delight</Kerned>`
+      ? `<Ram>delight</Ram>`
       : attrs.length === 1
-        ? `<Kerned ${attrs[0]}>delight</Kerned>`
-        : `<Kerned\n${attrs.map((a) => `  ${a}`).join("\n")}\n>\n  delight\n</Kerned>`;
+        ? `<Ram ${attrs[0]}>delight</Ram>`
+        : `<Ram\n${attrs.map((a) => `  ${a}`).join("\n")}\n>\n  delight\n</Ram>`;
 
   return (
     <Section
@@ -73,7 +73,7 @@ export function Animation() {
       </div>
       <Preview resetKey={JSON.stringify(props)}>
         <Sample>
-          built to <Kerned {...props}>delight</Kerned>
+          built to <Ram {...props}>delight</Ram>
         </Sample>
       </Preview>
       <Code>{code}</Code>

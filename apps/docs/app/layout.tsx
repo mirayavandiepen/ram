@@ -8,24 +8,26 @@ import { THEME_SCRIPT } from "@/lib/theme";
 
 import "./globals.css";
 
-const description = "A design-tool selection effect for React.";
+// The meaning travels with the name everywhere the name goes, including the
+// places nobody sees on the page: a search result, a shared link, a tab.
+const description = `Swedish for "${site.meaning}". A tiny React component for animated design-tool selection frames around text.`;
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kerned.dev"),
-  title: "Kerned",
+  metadataBase: new URL(site.url),
+  title: site.name,
   description,
-  keywords: ["react", "animation", "selection", "figma", "typography"],
+  keywords: ["react", "animation", "selection", "frame", "figma", "typography"],
   authors: [{ name: site.author }],
   openGraph: {
     type: "website",
-    title: "Kerned",
+    title: site.name,
     description,
     url: "/",
-    siteName: "Kerned",
+    siteName: site.name,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kerned",
+    title: site.name,
     description,
   },
 };

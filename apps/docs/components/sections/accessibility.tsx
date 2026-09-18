@@ -10,7 +10,7 @@ export function Accessibility() {
           <code className="font-mono text-[13px] text-foreground">prefers-reduced-motion</code>{" "}
           drops the tracking pass. The box still fades in and out.
         </li>
-        <li>Kerned adds no headings, landmarks or roles, so the semantics of the surrounding markup are unchanged.</li>
+        <li>Ram adds no headings, landmarks or roles, so the semantics of the surrounding markup are unchanged.</li>
       </ul>
     </Section>
   );

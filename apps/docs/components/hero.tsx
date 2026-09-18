@@ -1,6 +1,6 @@
 "use client";
 
-import { Kerned } from "kerned";
+import { Ram } from "ram";
 import { useState } from "react";
 
 import { site } from "@/lib/site";
@@ -12,9 +12,9 @@ export function Hero() {
     <header className="flex flex-col items-center pt-40 pb-28 text-center sm:pt-48">
       <h1 className="text-[44px] leading-none font-medium tracking-[-0.035em] whitespace-nowrap sm:text-[64px]">
         built to{" "}
-        <Kerned key={run} delay={run === 0 ? 700 : 150}>
+        <Ram key={run} delay={run === 0 ? 700 : 150}>
           delight
-        </Kerned>
+        </Ram>
       </h1>
 
       <p className="mt-16 text-[17px] font-medium tracking-[-0.01em]">{site.name}</p>
