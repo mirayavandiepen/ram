@@ -2,18 +2,56 @@ import { Ram } from "ram";
 
 import { Code } from "../code";
 import { Preview, Sample } from "../preview";
+import { type ReferenceRow, Reference } from "../reference";
 import { Section } from "../section";
 
-const VARIABLES: [string, string][] = [
-  ["--ram-color", "outline, handles and label. Defaults to currentColor."],
-  ["--ram-line-width", "1px"],
-  ["--ram-outline-opacity", "0.6"],
-  ["--ram-handle-size", "6px"],
-  ["--ram-inset", "4px, how far the outline sits outside the text"],
-  ["--ram-label-background", "defaults to the frame colour"],
-  ["--ram-label-color", "white on light schemes, near-black on dark"],
-  ["--ram-label-font-size", "11px"],
-  ["--ram-label-offset", "6px"],
+const VARIABLES: ReferenceRow[] = [
+  {
+    name: "--ram-color",
+    default: "currentColor",
+    description: "Colour of the outline, handles and label.",
+  },
+  {
+    name: "--ram-line-width",
+    default: "1px",
+    description: "Thickness of the outline.",
+  },
+  {
+    name: "--ram-outline-opacity",
+    default: "0.6",
+    description:
+      "How far the outline is held below full strength. The handles stay solid.",
+  },
+  {
+    name: "--ram-handle-size",
+    default: "6px",
+    description: "Width and height of each corner handle.",
+  },
+  {
+    name: "--ram-inset",
+    default: "4px",
+    description: "How far the outline sits outside the text.",
+  },
+  {
+    name: "--ram-label-background",
+    default: "currentColor",
+    description: "Background of the label, which follows the frame colour.",
+  },
+  {
+    name: "--ram-label-color",
+    default: "light-dark(#fff, #111)",
+    description: "Label text: white on light schemes, near-black on dark.",
+  },
+  {
+    name: "--ram-label-font-size",
+    default: "11px",
+    description: "Label text size.",
+  },
+  {
+    name: "--ram-label-offset",
+    default: "6px",
+    description: "Gap between the label and the outline.",
+  },
 ];
 
 export function Styling() {
@@ -48,14 +86,7 @@ export function Styling() {
         The chrome is tuned with CSS variables, set on the component or any
         ancestor.
       </p>
-      <dl className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-1.5 text-[13px]">
-        {VARIABLES.map(([name, description]) => (
-          <div key={name} className="contents">
-            <dt className="text-foreground font-mono">{name}</dt>
-            <dd className="text-muted">{description}</dd>
-          </div>
-        ))}
-      </dl>
+      <Reference nameLabel="Variable" rows={VARIABLES} />
       <Preview>
         <Sample>
           built to{" "}

@@ -1,6 +1,6 @@
 # ram
 
-**Ram** (Swedish for "frame", pronounced _rahm_) is a tiny React component for animated design-tool selection frames around text.
+**Ram** (Swedish for "frame", pronounced `/rɑːm/`, like _rahm_, rhyming with "calm") is a tiny React component for animated design-tool selection frames around text.
 
 Wrap a word and it gets a hairline outline, four corner handles and a live `width × height` label, with a short letter-spacing pass that never moves the text around it.
 
