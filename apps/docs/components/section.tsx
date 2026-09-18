@@ -19,7 +19,9 @@ export function Section({
         </a>
       </h2>
       {description ? (
-        <p className="mt-2 max-w-[56ch] text-[15px] text-muted">{description}</p>
+        <p className="text-muted mt-2 max-w-[56ch] text-pretty text-[15px]">
+          {description}
+        </p>
       ) : null}
       <div className="mt-5 flex flex-col gap-4">{children}</div>
     </section>
