@@ -1,11 +1,16 @@
 "use client";
 
-import { type ReactNode, useState } from "react";
+import { type ReactNode, useEffect, useRef, useState } from "react";
 
 /**
- * A bordered stage for a live example. Every change to `resetKey` remounts the
- * children so the marker plays again from the start, and the replay button
- * does the same by hand.
+ * A bordered stage for a live example. The children are remounted to replay
+ * the marker: on a change of `resetKey`, on the replay button, and once when
+ * the stage first scrolls into view. Without that last one every example below
+ * the fold would have played and left before the reader ever reached it.
+ *
+ * Remounting rather than rendering late means the sample text is on the page
+ * the whole time and never pops in. React swaps identical markup, so the only
+ * thing the remount actually restarts is the marker's own timeline.
  */
 export function Preview({
   children,
@@ -19,11 +24,34 @@ export function Preview({
   className?: string;
 }) {
   const [run, setRun] = useState(0);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const [seen, setSeen] = useState(false);
+
+  useEffect(() => {
+    const stage = stageRef.current;
+    if (!stage || seen) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setSeen(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        setSeen(true);
+        observer.disconnect();
+      },
+      { threshold: 0.25 },
+    );
+    observer.observe(stage);
+    return () => observer.disconnect();
+  }, [seen]);
+
   return (
     <div
+      ref={stageRef}
       className={`relative flex min-h-[168px] items-center justify-center overflow-hidden rounded-lg border border-border bg-surface px-6 py-10 ${className}`}
     >
-      <div key={`${resetKey}:${run}`} className="contents">
+      <div key={`${resetKey}:${run}:${seen}`} className="contents">
         {children}
       </div>
       {replay ? (
