@@ -1,7 +1,13 @@
 @import "tailwindcss";
 
+/**
+ * One palette, one place. The resolved theme is stamped on the root as
+ * `data-theme` before first paint, including when it is being read off the
+ * system, so the cascade never has to ask twice and there is no second copy of
+ * the dark values behind a media query to keep in step.
+ */
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
   --background: #ffffff;
   --foreground: #111111;
   --muted: #6f6f6f;
@@ -22,27 +28,26 @@
   --tok-punct: #7a7a7a;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --muted: #8f8f8f;
-    --faint: #5c5c5c;
-    --border: #232323;
-    --border-strong: #333333;
-    --code-bg: #111111;
-    --surface: #0f0f0f;
-    --surface-hover: #1a1a1a;
-    --primary: #ededed;
-    --primary-foreground: #0a0a0a;
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --muted: #8f8f8f;
+  --faint: #5c5c5c;
+  --border: #232323;
+  --border-strong: #333333;
+  --code-bg: #111111;
+  --surface: #0f0f0f;
+  --surface-hover: #1a1a1a;
+  --primary: #ededed;
+  --primary-foreground: #0a0a0a;
 
-    --tok-keyword: #a99ce6;
-    --tok-string: #7fc9a2;
-    --tok-tag: #e8867f;
-    --tok-attr: #d9a85a;
-    --tok-comment: #6a6a6a;
-    --tok-punct: #8c8c8c;
-  }
+  --tok-keyword: #a99ce6;
+  --tok-string: #7fc9a2;
+  --tok-tag: #e8867f;
+  --tok-attr: #d9a85a;
+  --tok-comment: #6a6a6a;
+  --tok-punct: #8c8c8c;
 }
 
 @theme inline {
