@@ -10,7 +10,10 @@ import { Segmented } from "../segmented";
 
 const VARIANTS = {
   Default: { code: `<Ram>delight</Ram>`, props: {} },
-  "No label": { code: `<Ram label={false}>delight</Ram>`, props: { label: false } },
+  "No label": {
+    code: `<Ram label={false}>delight</Ram>`,
+    props: { label: false },
+  },
   "No handles": {
     code: `<Ram handles={false}>delight</Ram>`,
     props: { handles: false },

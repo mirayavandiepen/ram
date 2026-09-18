@@ -6,12 +6,18 @@
     "build": "pnpm --filter ram build && pnpm --filter docs build",
     "dev": "pnpm --parallel --filter ram --filter docs dev",
     "typecheck": "pnpm -r typecheck",
-    "lint": "pnpm -r lint"
+    "lint": "pnpm -r lint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild",
       "sharp"
     ]
+  },
+  "devDependencies": {
+    "prettier": "^3",
+    "prettier-plugin-tailwindcss": "^0.6"
   }
 }

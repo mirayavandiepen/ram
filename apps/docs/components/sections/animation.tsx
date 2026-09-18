@@ -51,7 +51,12 @@ export function Animation() {
       description="Control how the frame enters, moves and leaves. The tracking pass loosens the letter-spacing, tightens past where it started, and settles back, without ever moving the text around it."
     >
       <div className="flex flex-col gap-2">
-        <Segmented label="Mode" value={mode} onChange={setMode} options={MODES} />
+        <Segmented
+          label="Mode"
+          value={mode}
+          onChange={setMode}
+          options={MODES}
+        />
         <Segmented
           label="delay"
           value={delay}

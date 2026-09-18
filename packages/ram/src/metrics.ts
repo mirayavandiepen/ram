@@ -31,7 +31,8 @@ export function contentOverhang(element: HTMLElement, lineBox: number): number {
   // Ascent and descent are properties of the font, not of the string.
   const metrics = context.measureText("x");
   const content =
-    (metrics.fontBoundingBoxAscent ?? 0) + (metrics.fontBoundingBoxDescent ?? 0);
+    (metrics.fontBoundingBoxAscent ?? 0) +
+    (metrics.fontBoundingBoxDescent ?? 0);
 
   return Math.max(0, (content - lineBox) / 2);
 }

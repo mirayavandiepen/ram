@@ -30,7 +30,11 @@ export function tokenize(source: string): Token[] {
       if (match && match[0].length > 0) {
         const text = match[0];
         const last = tokens[tokens.length - 1];
-        if (last && last.kind === kind && (kind === "text" || kind === "punct")) {
+        if (
+          last &&
+          last.kind === kind &&
+          (kind === "text" || kind === "punct")
+        ) {
           last.text += text;
         } else {
           tokens.push({ kind, text });

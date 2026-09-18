@@ -23,7 +23,8 @@ const CODE: Record<Option, string> = {
 
 export function Label() {
   const [option, setOption] = useState<Option>("Show");
-  const label = option === "Show" ? true : option === "Hide" ? false : widthOnly;
+  const label =
+    option === "Show" ? true : option === "Hide" ? false : widthOnly;
 
   return (
     <Section

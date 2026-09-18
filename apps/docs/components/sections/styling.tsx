@@ -26,10 +26,16 @@ export function Styling() {
       <Preview>
         <div className="flex flex-col items-center gap-12">
           <Sample size="sm" weight="normal">
-            built to <Ram delay={200} persistent>delight</Ram>
+            built to{" "}
+            <Ram delay={200} persistent>
+              delight
+            </Ram>
           </Sample>
           <Sample size="lg" weight="semibold">
-            built to <Ram delay={500} persistent>delight</Ram>
+            built to{" "}
+            <Ram delay={500} persistent>
+              delight
+            </Ram>
           </Sample>
         </div>
       </Preview>
@@ -38,14 +44,14 @@ export function Styling() {
   built to <Ram>delight</Ram>
 </h1>
 `}</Code>
-      <p className="text-[15px] text-muted">
+      <p className="text-muted text-[15px]">
         The chrome is tuned with CSS variables, set on the component or any
         ancestor.
       </p>
       <dl className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-1.5 text-[13px]">
         {VARIABLES.map(([name, description]) => (
           <div key={name} className="contents">
-            <dt className="font-mono text-foreground">{name}</dt>
+            <dt className="text-foreground font-mono">{name}</dt>
             <dd className="text-muted">{description}</dd>
           </div>
         ))}

@@ -6,7 +6,11 @@ import { Section } from "../section";
 
 export function Usage() {
   return (
-    <Section id="usage" title="Usage" description="Wrap the text you want to frame.">
+    <Section
+      id="usage"
+      title="Usage"
+      description="Wrap the text you want to frame."
+    >
       <Preview>
         <Sample>
           built to <Ram delay={300}>delight</Ram>
