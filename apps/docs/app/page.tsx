@@ -7,6 +7,7 @@ import { Animation } from "@/components/sections/animation";
 import { Api } from "@/components/sections/api";
 import { Appearance } from "@/components/sections/appearance";
 import { Label } from "@/components/sections/label";
+import { Overview } from "@/components/sections/overview";
 import { Position } from "@/components/sections/position";
 import { Styling } from "@/components/sections/styling";
 import { Trigger } from "@/components/sections/trigger";
@@ -17,6 +18,7 @@ export default function Page() {
     <main className="mx-auto w-full max-w-[640px] px-6">
       <Hero />
       <div className="flex flex-col gap-20">
+        <Overview />
         <Section id="installation" title="Installation">
           <Install />
         </Section>
