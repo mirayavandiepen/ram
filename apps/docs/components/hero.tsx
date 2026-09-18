@@ -51,9 +51,13 @@ export function Hero() {
         </a>
       </div>
 
+      {/* Part of the same cluster as the two buttons rather than a stranded
+          third thing, and underlined so it reads as the link it is beside two
+          controls that are not. Thickness and position come from the font's
+          own metrics, so the rule sits where the typeface intends it. */}
       <a
         href="#installation"
-        className="text-muted hover:text-foreground mt-12 text-[13px]"
+        className="text-muted decoration-faint ease-out-quart hover:text-foreground hover:decoration-foreground mt-5 text-[13px] underline decoration-from-font underline-offset-[3px] transition-colors duration-150"
       >
         Documentation
       </a>

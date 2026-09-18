@@ -73,7 +73,7 @@ export function Pronunciation() {
       // The native tooltip as well as the label: hovering a lone icon should
       // answer what it does without a click.
       title={`Hear how ${site.name} is pronounced`}
-      className={`grid size-6 shrink-0 place-items-center rounded ${HIT_AREA} ${PRESS} ${
+      className={`relative grid size-6 shrink-0 place-items-center rounded ${HIT_AREA} ${PRESS} ${
         speaking ? "text-foreground" : "text-muted hover:text-foreground"
       }`}
     >

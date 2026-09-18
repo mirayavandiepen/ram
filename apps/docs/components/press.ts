@@ -16,10 +16,20 @@ export const PRESS =
  * Only safe where nothing sits within the extra ring, since two overlapping
  * hit areas steal each other's taps.
  *
- * Deliberately carries no `position`. It used to set `relative`, which beats
- * `absolute` in Tailwind's own cascade order no matter which is written last,
- * so every corner-pinned control it touched fell back into the document flow.
- * The pseudo-element needs a positioned ancestor, so a statically positioned
- * control pairs this with `relative` itself.
+ * `relative` is part of it because the pseudo-element is offset against its
+ * nearest positioned ancestor: on a static control that is the viewport, and
+ * the ring becomes a full-page sheet that swallows every click on the page.
+ *
+ * Tailwind emits `relative` after `absolute`, so a corner-pinned control
+ * cannot simply add `absolute` alongside this and win. Those controls use
+ * ABSOLUTE_HIT_AREA instead, which leaves the positioning to them.
  */
-export const HIT_AREA = "after:absolute after:-inset-1.5 after:content-['']";
+export const HIT_AREA =
+  "relative after:absolute after:-inset-1.5 after:content-['']";
+
+/**
+ * The same ring for a control that already positions itself. It supplies the
+ * containing block, so this must not declare one of its own.
+ */
+export const ABSOLUTE_HIT_AREA =
+  "after:absolute after:-inset-1.5 after:content-['']";

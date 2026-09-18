@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { HIT_AREA, PRESS } from "./press";
+import { ABSOLUTE_HIT_AREA, PRESS } from "./press";
 
 /**
  * Both icons stay mounted and cross-fade. Swapping one for the other would
@@ -51,7 +51,7 @@ export function CopyButton({
         // A fixed name, because renaming a control is not a reliable way to
         // announce that something happened. The status region below is.
         aria-label="Copy to clipboard"
-        className={`text-faint hover:bg-surface-hover hover:text-foreground relative grid size-7 shrink-0 place-items-center rounded-md ${HIT_AREA} ${PRESS} ${className}`}
+        className={`text-faint hover:bg-surface-hover hover:text-foreground relative grid size-7 shrink-0 place-items-center rounded-md ${ABSOLUTE_HIT_AREA} ${PRESS} ${className}`}
       >
         <span className="relative grid size-[14px] place-items-center">
           <svg

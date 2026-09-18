@@ -2,7 +2,7 @@
 
 import { type ReactNode, useEffect, useRef, useState } from "react";
 
-import { HIT_AREA, PRESS } from "./press";
+import { ABSOLUTE_HIT_AREA, PRESS } from "./press";
 
 /**
  * A bordered stage for a live example. The children are remounted to replay
@@ -61,7 +61,7 @@ export function Preview({
           type="button"
           aria-label="Replay"
           onClick={() => setRun((n) => n + 1)}
-          className={`text-faint hover:bg-surface-hover hover:text-foreground absolute right-2 top-2 grid size-7 place-items-center rounded-md ${HIT_AREA} ${PRESS}`}
+          className={`text-faint hover:bg-surface-hover hover:text-foreground absolute right-2 top-2 grid size-7 place-items-center rounded-md ${ABSOLUTE_HIT_AREA} ${PRESS}`}
         >
           <svg
             width="14"
