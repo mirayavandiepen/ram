@@ -16,10 +16,10 @@ export function Overview() {
         {/* The notation and the button that speaks it are one unit; left to
             wrap they end up on separate lines and the speaker reads as
             punctuation. */}
-        <span className="whitespace-nowrap">
+        <span className="inline-flex items-center gap-1 whitespace-nowrap align-middle">
           <code
             aria-hidden="true"
-            className="border-border bg-code-bg text-foreground rounded-[4px] border px-[5px] py-[1px] font-mono text-[13px]"
+            className="border-border bg-code-bg text-foreground flex h-6 items-center rounded-[4px] border px-1.5 font-mono text-[13px]"
           >
             {site.ipa}
           </code>

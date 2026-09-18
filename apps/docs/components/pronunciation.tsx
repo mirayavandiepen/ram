@@ -70,17 +70,22 @@ export function Pronunciation() {
       type="button"
       onClick={speak}
       aria-label={`Hear how ${site.name} is pronounced`}
-      className={`ml-[3px] inline-grid size-4 translate-y-[3px] place-items-center rounded ${HIT_AREA} ${PRESS} ${
-        speaking ? "text-foreground" : "text-faint hover:text-foreground"
+      // The native tooltip as well as the label: hovering a lone icon should
+      // answer what it does without a click.
+      title={`Hear how ${site.name} is pronounced`}
+      className={`grid size-6 shrink-0 place-items-center rounded ${HIT_AREA} ${PRESS} ${
+        speaking ? "text-foreground" : "text-muted hover:text-foreground"
       }`}
     >
       <svg
-        width="13"
-        height="13"
+        width="15"
+        height="15"
         viewBox="0 0 16 16"
         fill="none"
         stroke="currentColor"
-        strokeWidth="1.25"
+        // 1.5 against body text at weight 400. A hairline icon beside text
+        // reads as a smudge rather than a control.
+        strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
         aria-hidden="true"

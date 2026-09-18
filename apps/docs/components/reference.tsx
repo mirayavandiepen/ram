@@ -13,16 +13,16 @@ export type ReferenceRow = {
  * The reference tables: props on one page, CSS variables on another, both
  * read the same way.
  *
- * The defaults live in a column of their own rather than trailing each
- * sentence. Seventeen descriptions all ending in "Defaults to x" buries the
- * one thing the reader is usually scanning for, and the answer is a value,
- * not prose.
+ * Two things are deliberately absent. The names and defaults are colour and
+ * type alone, with no filled chip behind them: a seventeen-row table with two
+ * boxes per row is thirty-four small rectangles, and they compete with the
+ * sentence that is the thing actually being read. And a prop with no default
+ * leaves its cell empty rather than drawing a dash, because a column of
+ * placeholders reads as content.
  *
- * Below `sm` there is no room for three columns, so the type and the
- * description drop to a second row underneath and the name keeps the default
- * beside it. The grid placement is explicit for exactly that reason: source
- * order is name, type, default, and auto-placement would put the type where
- * the default belongs.
+ * The description gets a line of its own across the full width instead of
+ * sharing the type's narrow column. A wider measure means far fewer of the
+ * two- and three-word orphan lines that make a table tiring to read.
  */
 export function Reference({
   nameLabel,
@@ -33,20 +33,28 @@ export function Reference({
   rows: ReferenceRow[];
 }) {
   const typed = rows.some((row) => row.type);
+
+  // Source order is name, type, default, description. Placement is explicit
+  // because auto-placement would put the type where the default belongs, and
+  // because the type only earns a column of its own once there is room.
   const grid = typed
-    ? "grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 px-3.5 sm:grid-cols-[116px_minmax(0,1fr)_auto] sm:gap-x-5"
-    : "grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 px-3.5";
-  // Without a type column there is no third track to move the body into, so
-  // it stays on its own row at every width.
-  const body = typed
+    ? "grid grid-cols-[minmax(0,1fr)_auto] gap-x-5 gap-y-2 px-4 sm:grid-cols-[112px_minmax(0,1fr)_auto]"
+    : "grid grid-cols-[minmax(0,1fr)_auto] gap-x-5 gap-y-2 px-4";
+  const typeCell = typed
     ? "col-span-2 col-start-1 row-start-2 sm:col-span-1 sm:col-start-2 sm:row-start-1"
+    : "";
+  const defaultCell = typed
+    ? "col-start-2 row-start-1 text-right sm:col-start-3"
+    : "col-start-2 row-start-1 text-right";
+  const descriptionCell = typed
+    ? "col-span-2 col-start-1 row-start-3 sm:col-span-3 sm:row-start-2"
     : "col-span-2 col-start-1 row-start-2";
 
   return (
-    <div className="border-border overflow-hidden rounded-lg border">
+    <div className="border-border overflow-hidden rounded-xl border">
       <div
         aria-hidden="true"
-        className={`${grid} border-border bg-code-bg text-muted h-9 items-center border-b text-[12px] font-medium`}
+        className={`${grid} border-border bg-code-bg text-muted h-10 items-center border-b text-[12px]`}
       >
         <span>{nameLabel}</span>
         {typed ? <span className="hidden sm:block">Type</span> : null}
@@ -54,44 +62,27 @@ export function Reference({
       </div>
       <dl className="divide-border divide-y">
         {rows.map((row) => (
-          <div key={row.name} className={`${grid} items-start py-3`}>
-            <dt>
-              <code className="bg-accent-soft text-accent inline-block rounded px-1.5 py-0.5 font-mono text-[12.5px] leading-5">
-                {row.name}
-              </code>
-            </dt>
-            <dd className={`${body} min-w-0`}>
-              {row.type ? (
-                <code className="text-muted block break-words py-0.5 font-mono text-[12.5px] leading-5">
-                  {row.type}
-                </code>
-              ) : null}
-              <p
-                className={`text-pretty text-[13.5px] leading-[1.55] ${
-                  row.type ? "mt-1" : "mt-1.5"
-                }`}
+          <div key={row.name} className={`${grid} items-baseline py-4`}>
+            <dt className="text-accent font-mono text-[13px]">{row.name}</dt>
+            {row.type ? (
+              <dd
+                className={`${typeCell} text-muted min-w-0 break-words font-mono text-[13px]`}
               >
-                {row.description}
-              </p>
-            </dd>
+                {row.type}
+              </dd>
+            ) : null}
+            {/* The column heading is decorative, so the word a screen reader
+                needs travels with the value itself. */}
+            {row.default ? (
+              <dd className={`${defaultCell} font-mono text-[13px]`}>
+                <span className="sr-only">Default: </span>
+                {row.default}
+              </dd>
+            ) : null}
             <dd
-              className={`col-start-2 row-start-1 text-right ${
-                typed ? "sm:col-start-3" : ""
-              }`}
+              className={`${descriptionCell} max-w-[68ch] text-pretty text-[14px] leading-[1.65]`}
             >
-              {/* The column heading is decorative, so the word a screen
-                  reader needs travels with the value itself. */}
-              {row.default ? (
-                <code className="bg-surface-hover text-foreground inline-block rounded px-1.5 py-0.5 font-mono text-[12.5px] leading-5">
-                  <span className="sr-only">Default: </span>
-                  {row.default}
-                </code>
-              ) : (
-                <span className="text-faint inline-block py-0.5 text-[12.5px] leading-5">
-                  <span className="sr-only">No default</span>
-                  <span aria-hidden="true">&mdash;</span>
-                </span>
-              )}
+              {row.description}
             </dd>
           </div>
         ))}

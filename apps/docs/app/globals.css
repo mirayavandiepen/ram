@@ -23,7 +23,6 @@
   /* The one hue on the page. It marks names in the reference tables and
      nothing else, so a prop name is findable by colour alone. */
   --accent: #c2186f;
-  --accent-soft: #fbeef6;
 
   --tok-keyword: #6b5db5;
   --tok-string: #2f7a58;
@@ -48,7 +47,6 @@
   --primary-hover: #cfcfcf;
   --primary-foreground: #0a0a0a;
   --accent: #f77fc0;
-  --accent-soft: #2a1320;
 
   --tok-keyword: #a99ce6;
   --tok-string: #7fc9a2;
@@ -81,7 +79,6 @@
   --color-primary-hover: var(--primary-hover);
   --color-primary-foreground: var(--primary-foreground);
   --color-accent: var(--accent);
-  --color-accent-soft: var(--accent-soft);
 }
 
 /**
