@@ -17,8 +17,11 @@
   --code-bg: #fafafa;
   --surface: #ffffff;
   --surface-hover: #f5f5f5;
-  --primary: #111111;
-  --primary-hover: #2e2e2e;
+  /* A dark grey, not the foreground's near-black. A filled pill covers far
+     more area than a glyph does, so the same value that reads as text reads
+     as a slab when it becomes a background. */
+  --primary: #3f3f3f;
+  --primary-hover: #545454;
   --primary-foreground: #ffffff;
   /* The one hue on the page. It marks names in the reference tables and
      nothing else, so a prop name is findable by colour alone. */
@@ -43,8 +46,9 @@
   --code-bg: #111111;
   --surface: #0f0f0f;
   --surface-hover: #1a1a1a;
-  --primary: #ededed;
-  --primary-hover: #cfcfcf;
+  /* The same step back from the foreground, going the other way. */
+  --primary: #d8d8d8;
+  --primary-hover: #eaeaea;
   --primary-foreground: #0a0a0a;
   --accent: #f77fc0;
 
