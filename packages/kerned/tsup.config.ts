@@ -7,7 +7,6 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   minify: false,
-  treeshake: true,
   external: ["react", "react-dom"],
   // Keeps the component usable from server components in Next.js without the
   // consumer having to wrap it themselves.
