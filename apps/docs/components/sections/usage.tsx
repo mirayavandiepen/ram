@@ -1,4 +1,4 @@
-import { Ram } from "ram";
+import { Ram } from "@mirayavandiepen/ram";
 
 import { Code } from "../code";
 import { Preview, Sample } from "../preview";
@@ -17,7 +17,7 @@ export function Usage() {
         </Sample>
       </Preview>
       <Code label="example.tsx">{`
-import { Ram } from "ram";
+import { Ram } from "@mirayavandiepen/ram";
 
 export default function Example() {
   return (

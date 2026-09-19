@@ -1,6 +1,6 @@
 "use client";
 
-import { Ram, type RamSize } from "ram";
+import { Ram, type RamSize } from "@mirayavandiepen/ram";
 import { useState } from "react";
 
 import { Code } from "../code";

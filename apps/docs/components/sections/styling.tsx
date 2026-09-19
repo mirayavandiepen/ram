@@ -1,4 +1,4 @@
-import { Ram } from "ram";
+import { Ram } from "@mirayavandiepen/ram";
 
 import { CSS_VARIABLES } from "@/lib/reference";
 

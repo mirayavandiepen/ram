@@ -1,6 +1,6 @@
 "use client";
 
-import { Ram, type RamLabelPosition } from "ram";
+import { Ram, type RamLabelPosition } from "@mirayavandiepen/ram";
 import { useState } from "react";
 
 import { Code } from "../code";

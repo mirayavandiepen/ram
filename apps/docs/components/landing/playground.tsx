@@ -1,6 +1,6 @@
 "use client";
 
-import { Ram } from "ram";
+import { Ram } from "@mirayavandiepen/ram";
 import { useState } from "react";
 
 import { Code } from "../code";

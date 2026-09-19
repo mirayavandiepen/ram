@@ -1,6 +1,6 @@
 export const site = {
   name: "Ram",
-  pkg: "ram",
+  pkg: "@mirayavandiepen/ram",
   /** Swedish for "frame", and the reason the library is called this. */
   meaning: "frame",
   /**
@@ -14,9 +14,9 @@ export const site = {
   /** What that spelling rhymes with, for anyone still unsure. */
   rhyme: "calm",
   tagline: "A design-tool selection effect for React.",
-  url: "https://ram.dev",
+  url: "https://github.com/mirayavandiepen/ram",
   github: "https://github.com/mirayavandiepen/ram",
-  npm: "https://www.npmjs.com/package/ram",
+  npm: "https://www.npmjs.com/package/@mirayavandiepen/ram",
   x: "https://x.com/mirayavandiepen",
   author: "Miraya",
   /** The byline's destination, so the name in the footer goes somewhere. */
