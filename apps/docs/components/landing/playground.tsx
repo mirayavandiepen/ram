@@ -20,6 +20,14 @@ const HANDLES = [
   { value: "off", label: "Off" },
 ] as const;
 
+/** Thickness of the outline only. A handle ring stays hairline at every step,
+ * the way a design tool draws one. */
+const WIDTHS = [
+  { value: "1", label: "1px" },
+  { value: "2", label: "2px" },
+  { value: "3", label: "3px" },
+] as const;
+
 const MOTIONS = [
   { value: "tracking", label: "Tracking" },
   { value: "static", label: "Static" },
@@ -41,10 +49,12 @@ const COLORS = [
 type LabelMode = (typeof LABELS)[number]["value"];
 type HandleMode = (typeof HANDLES)[number]["value"];
 type Motion = (typeof MOTIONS)[number]["value"];
+type Width = (typeof WIDTHS)[number]["value"];
 
 const DEFAULTS = {
   label: "top" as LabelMode,
   handles: "hollow" as HandleMode,
+  width: "1" as Width,
   motion: "tracking" as Motion,
   color: null as string | null,
 };
@@ -52,6 +62,7 @@ const DEFAULTS = {
 export function Playground() {
   const [label, setLabel] = useState(DEFAULTS.label);
   const [handles, setHandles] = useState(DEFAULTS.handles);
+  const [width, setWidth] = useState(DEFAULTS.width);
   const [motion, setMotion] = useState(DEFAULTS.motion);
   const [color, setColor] = useState(DEFAULTS.color);
 
@@ -67,12 +78,14 @@ export function Playground() {
   const dirty =
     label !== DEFAULTS.label ||
     handles !== DEFAULTS.handles ||
+    width !== DEFAULTS.width ||
     motion !== DEFAULTS.motion ||
     color !== DEFAULTS.color;
 
   const reset = () => {
     setLabel(DEFAULTS.label);
     setHandles(DEFAULTS.handles);
+    setWidth(DEFAULTS.width);
     setMotion(DEFAULTS.motion);
     setColor(DEFAULTS.color);
     bump();
@@ -83,6 +96,7 @@ export function Playground() {
     labelPosition: label === "off" ? "top" : label,
     handles: handles !== "off",
     handleFill: handles === "solid" ? ("solid" as const) : ("hollow" as const),
+    lineWidth: Number(width),
     animation: motion,
     ...(color ? { color } : {}),
   } as const;
@@ -92,6 +106,7 @@ export function Playground() {
     label === "bottom" ? `labelPosition="bottom"` : null,
     handles === "off" ? "handles={false}" : null,
     handles === "solid" ? `handleFill="solid"` : null,
+    width !== DEFAULTS.width ? `lineWidth={${width}}` : null,
     motion === "static" ? `animation="static"` : null,
     color ? `color="${color}"` : null,
   ].filter(Boolean) as string[];
@@ -174,6 +189,20 @@ export function Playground() {
                     bump();
                   }}
                   options={HANDLES}
+                />
+              </ControlRow>
+            </div>
+            <div className="px-3.5 py-2.5">
+              <ControlRow label="Thickness">
+                <Segmented
+                  hideLabel
+                  label="Thickness"
+                  value={width}
+                  onChange={(next) => {
+                    setWidth(next);
+                    bump();
+                  }}
+                  options={WIDTHS}
                 />
               </ControlRow>
             </div>
