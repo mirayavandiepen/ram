@@ -22,9 +22,13 @@ const VARIANTS = {
     code: `<Ram handleFill="solid">delight</Ram>`,
     props: { handleFill: "solid" },
   },
+  "White handles": {
+    code: `<Ram handleBackground="#fff">delight</Ram>`,
+    props: { handleBackground: "#fff" },
+  },
   Thicker: {
-    code: `<Ram lineWidth={2} handleSize={8}>\n  delight\n</Ram>`,
-    props: { lineWidth: 2, handleSize: 8 },
+    code: `<Ram lineWidth={3} handleSize={8} handleLineWidth={2}>\n  delight\n</Ram>`,
+    props: { lineWidth: 3, handleSize: 8, handleLineWidth: 2 },
   },
   "Outline only": {
     code: `<Ram label={false} handles={false}>\n  delight\n</Ram>`,
@@ -33,6 +37,10 @@ const VARIANTS = {
   "Custom color": {
     code: `<Ram color="#7c3aed">delight</Ram>`,
     props: { color: "#7c3aed" },
+  },
+  "Custom label": {
+    code: `<Ram labelBackground="#111" labelColor="#fff">\n  delight\n</Ram>`,
+    props: { labelBackground: "#111", labelColor: "#fff" },
   },
 } as const;
 
@@ -46,7 +54,7 @@ export function Appearance() {
     <Section
       id="parts"
       title="Parts of the frame"
-      description="Every part of the frame is optional. Drawn in selection blue by default, or in any colour you name."
+      description="Every part of the frame is optional. Drawn in selection blue by default, or in any colour you name — outline, handles and label each take one of their own."
     >
       <ExampleBrowser
         label="Variant"
