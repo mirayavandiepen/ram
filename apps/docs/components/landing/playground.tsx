@@ -115,7 +115,11 @@ export function Playground() {
         resetKey={`${JSON.stringify(props)}:${runs}`}
         onReplay={bump}
       >
-        <h1 className="whitespace-nowrap text-center text-[40px] font-medium leading-none tracking-[-0.035em] sm:text-[60px]">
+        {/* Set in steps rather than left to wrap: the line is the specimen,
+              so it has to stay one line. At 40px it measures 257px and the
+              stage has 224px to give at 320px wide, and `overflow-hidden`
+              takes the difference off the right-hand handles. */}
+        <h1 className="whitespace-nowrap text-center text-[32px] font-medium leading-none tracking-[-0.035em] min-[380px]:text-[40px] sm:text-[60px]">
           built to{" "}
           <Ram delay={runs === 0 ? 700 : 150} persistent {...props}>
             delight
