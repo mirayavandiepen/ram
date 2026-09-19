@@ -1,6 +1,6 @@
 "use client";
 
-import { BUTTON_PRIMARY, BUTTON_SECONDARY, BUTTON_SM } from "./button";
+import { PRESS } from "./press";
 
 export type Option<T extends string> = { value: T; label?: string };
 
@@ -34,8 +34,11 @@ export function Segmented<T extends string>({
               aria-pressed={selected}
               onClick={() => onChange(item.value)}
               className={[
-                selected ? BUTTON_PRIMARY : BUTTON_SECONDARY,
-                BUTTON_SM,
+                "h-7 rounded-full border px-3 text-[13px] leading-none",
+                PRESS,
+                selected
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "border-border bg-surface text-foreground hover:bg-surface-hover",
               ].join(" ")}
             >
               {item.label ?? item.value}

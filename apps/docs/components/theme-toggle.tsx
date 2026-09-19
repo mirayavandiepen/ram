@@ -39,7 +39,7 @@ export function ThemeToggle() {
     <div
       role="group"
       aria-label="Theme"
-      className="border-border-strong bg-surface flex items-center gap-0.5 rounded-full border p-0.5"
+      className="border-border bg-surface flex items-center gap-0.5 rounded-full border p-0.5"
     >
       {OPTIONS.map((option) => {
         const selected = ready && option.mode === mode;
