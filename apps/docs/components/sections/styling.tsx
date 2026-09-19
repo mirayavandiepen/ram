@@ -55,7 +55,7 @@ export function CustomProperties() {
             persistent
             style={
               {
-                "--ram-color": "#0d99ff",
+                "--ram-color": "#7c3aed",
                 "--ram-handle-size": "8px",
                 "--ram-inset": "8px",
               } as React.CSSProperties
@@ -68,7 +68,7 @@ export function CustomProperties() {
       <Code label="example.tsx">{`
 <Ram
   style={{
-    "--ram-color": "#0d99ff",
+    "--ram-color": "#7c3aed",
     "--ram-handle-size": "8px",
     "--ram-inset": "8px",
   }}

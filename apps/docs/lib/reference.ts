@@ -103,8 +103,9 @@ export const PROPS: ReferenceRow[] = [
   {
     name: "color",
     type: "string",
-    default: "currentColor",
-    description: "Colour of the outline, handles and label. Any CSS colour.",
+    default: "#0d99ff",
+    description:
+      "Colour of the outline, handles and label. Any CSS colour; selection blue by default.",
   },
   {
     name: "className",
@@ -133,7 +134,7 @@ export const PROPS: ReferenceRow[] = [
 export const CSS_VARIABLES: ReferenceRow[] = [
   {
     name: "--ram-color",
-    default: "currentColor",
+    default: "#0d99ff",
     description: "Colour of the outline, handles and label.",
   },
   {

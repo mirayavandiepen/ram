@@ -40,14 +40,14 @@ Zero dependencies. Inherits the parent's typography. Respects `prefers-reduced-m
 | `trigger`       | `"mount" \| "hover" \| "click" \| "manual"` | `"mount"`    |
 | `active`        | `boolean`                                   |              |
 | `persistent`    | `boolean`                                   | `false`      |
-| `color`         | `string`                                    |              |
+| `color`         | `string`                                    | `"#0d99ff"`  |
 | `onStart`       | `() => void`                                |              |
 | `onComplete`    | `() => void`                                |              |
 
 ## CSS variables
 
 ```css
---ram-color             /* outline, handles and label; defaults to currentColor */
+--ram-color             /* outline, handles and label; #0d99ff, selection blue */
 --ram-line-width        /* 1px, outline and handle rings */
 --ram-outline-opacity   /* 0.6 */
 --ram-handle-size       /* 6px */

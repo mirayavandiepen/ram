@@ -80,7 +80,7 @@ ${FENCE}
 
 ## Appearance
 
-Every part of the frame is optional. Monochrome by default, in whatever colour the text already is.
+Every part of the frame is optional. Drawn in selection blue by default, or in any colour you name.
 
 ${FENCE}tsx
 <Ram>delight</Ram>
@@ -159,7 +159,7 @@ ${table("Variable", CSS_VARIABLES)}
 ${FENCE}tsx
 <Ram
   style={{
-    "--ram-color": "#0d99ff",
+    "--ram-color": "#7c3aed",
     "--ram-handle-size": "8px",
     "--ram-inset": "8px",
   }}

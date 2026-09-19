@@ -50,8 +50,8 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
       {/* The theme control is placed by each layout rather than here: on the
-          landing page it floats at the top right, and in the docs it belongs
-          at the foot of the sidebar with the other page-level controls. */}
+          landing page it sits in the header with the other site controls, and
+          in the docs at the foot of the sidebar or in the mobile bar. */}
       <body>{children}</body>
     </html>
   );

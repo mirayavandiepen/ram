@@ -71,7 +71,7 @@ export type RamProps = {
   active?: boolean;
   /** Keep the frame on the page instead of leaving after the hold. */
   persistent?: boolean;
-  /** Colour of the outline, handles and label. Any CSS colour. */
+  /** Colour of the outline, handles and label. Any CSS colour; selection blue by default. */
   color?: string;
   className?: string;
   style?: CSSProperties;
@@ -606,6 +606,13 @@ function createController({
   return { measure, show, hide, toggle, dispose };
 }
 
+/**
+ * The blue every design tool draws a selection in. A frame that borrowed the
+ * text's own colour read as an underline with corners; in the tool's colour
+ * it reads as what it is, a selection, on top of type of any colour.
+ */
+const DEFAULT_COLOR = "#0d99ff";
+
 const HANDLE_SIZE = "var(--ram-handle-size, 6px)";
 /** Each handle is pulled back by half its size so it straddles the corner. */
 const HANDLE_OFFSET = `calc(${HANDLE_SIZE} / -2)`;
@@ -619,7 +626,7 @@ const layerStyle: CSSProperties = {
   // text does not. Giving it back here is what makes the gap on the right
   // match the gap on the left.
   right: "calc(var(--ram-inset, 4px) * -1 + var(--ram-trail, 0px))",
-  color: "var(--ram-color, currentColor)",
+  color: `var(--ram-color, ${DEFAULT_COLOR})`,
   pointerEvents: "none",
   userSelect: "none",
   opacity: 0,

@@ -26,8 +26,8 @@ export default function Page() {
       lede={
         <p>
           A frame is an outline, four corner handles and a measurement label.
-          Each part is optional, and all of them are drawn in the text&rsquo;s
-          own colour until you say otherwise.
+          Each part is optional, and all of them are drawn in selection blue
+          until you say otherwise.
         </p>
       }
     >

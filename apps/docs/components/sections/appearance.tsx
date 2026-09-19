@@ -46,7 +46,7 @@ export function Appearance() {
     <Section
       id="parts"
       title="Parts of the frame"
-      description="Every part of the frame is optional. Monochrome by default, in whatever colour the text already is."
+      description="Every part of the frame is optional. Drawn in selection blue by default, or in any colour you name."
     >
       <Segmented
         value={variant}

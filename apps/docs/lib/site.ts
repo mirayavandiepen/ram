@@ -19,4 +19,6 @@ export const site = {
   npm: "https://www.npmjs.com/package/ram",
   x: "https://x.com/miraya",
   author: "Miraya",
+  /** The byline's destination, so the name in the footer goes somewhere. */
+  authorUrl: "https://diepen.io",
 };
