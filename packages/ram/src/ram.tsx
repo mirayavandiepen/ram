@@ -73,6 +73,11 @@ export type RamProps = {
   persistent?: boolean;
   /** Colour of the outline, handles and label. Any CSS colour; selection blue by default. */
   color?: string;
+  /** Colour of the text inside the label. Defaults to the page colour, so the
+   * number reads out of the frame colour behind it. */
+  labelColor?: string;
+  /** Background of the label chip. Follows the frame colour by default. */
+  labelBackground?: string;
   className?: string;
   style?: CSSProperties;
   /** The frame has started to appear. */
@@ -155,6 +160,8 @@ export function Ram({
   active,
   persistent = false,
   color,
+  labelColor,
+  labelBackground,
   className,
   style,
   onStart,
@@ -238,18 +245,22 @@ export function Ram({
         ? label(measurement)
         : formatSize(measurement);
 
+  // Every appearance prop is a shorthand for the custom property the
+  // stylesheet already reads, so a prop and a `style` override are the same
+  // mechanism and `style` wins by landing last.
+  const vars: Record<string, string> = {};
+  if (color !== undefined) vars["--ram-color"] = color;
+  if (lineWidth !== undefined) vars["--ram-line-width"] = `${lineWidth}px`;
+  if (handleSize !== undefined) vars["--ram-handle-size"] = `${handleSize}px`;
+  if (labelColor !== undefined) vars["--ram-label-color"] = labelColor;
+  if (labelBackground !== undefined) {
+    vars["--ram-label-background"] = labelBackground;
+  }
+
   const rootStyle: CSSProperties = {
     position: "relative",
     display: "inline-block",
-    ...(color !== undefined
-      ? ({ "--ram-color": color } as CSSProperties)
-      : null),
-    ...(handleSize !== undefined
-      ? ({ "--ram-handle-size": `${handleSize}px` } as CSSProperties)
-      : null),
-    ...(lineWidth !== undefined
-      ? ({ "--ram-line-width": `${lineWidth}px` } as CSSProperties)
-      : null),
+    ...(vars as CSSProperties),
     ...style,
   };
 
