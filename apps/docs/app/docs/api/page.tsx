@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { DocsPage } from "@/components/docs/page-shell";
+import { InlineCode } from "@/components/inline-code";
 import { Reference } from "@/components/reference";
 import { NAV_ITEMS } from "@/lib/nav";
 import { PROPS } from "@/lib/reference";
@@ -20,16 +21,9 @@ export default function Page() {
       href={item.href}
       lede={
         <p>
-          Every prop{" "}
-          <code className="text-foreground font-mono text-[14px]">
-            &lt;{site.name} /&gt;
-          </code>{" "}
-          takes. Only{" "}
-          <code className="text-foreground font-mono text-[14px]">
-            children
-          </code>{" "}
-          is required; everything else has a default that looks like the
-          examples throughout these pages.
+          Every prop <InlineCode>&lt;{site.name} /&gt;</InlineCode> takes. Only{" "}
+          <InlineCode>children</InlineCode> is required; everything else has a
+          default that looks like the examples throughout these pages.
         </p>
       }
     >

@@ -1,3 +1,4 @@
+import { InlineCode } from "../inline-code";
 import { Section } from "../section";
 
 export function Accessibility() {
@@ -13,10 +14,8 @@ export function Accessibility() {
           exactly as written.
         </li>
         <li>
-          <code className="text-foreground font-mono text-[13px]">
-            prefers-reduced-motion
-          </code>{" "}
-          drops the tracking pass. The frame still fades in and out.
+          <InlineCode>prefers-reduced-motion</InlineCode> drops the tracking
+          pass. The frame still fades in and out.
         </li>
         <li>
           Ram adds no headings, landmarks or roles, so the semantics of the

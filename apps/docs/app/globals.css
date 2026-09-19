@@ -23,9 +23,18 @@
   --primary: #3f3f3f;
   --primary-hover: #545454;
   --primary-foreground: #ffffff;
-  /* The one hue on the page. It marks names in the reference tables and
-     nothing else, so a prop name is findable by colour alone. */
-  --accent: #c2186f;
+  /* The one hue on the page. It marks names from the API — in the reference
+     tables, and set into a sentence — so a name is findable by colour alone.
+
+     Deeper and greener than the #0d99ff the frame is drawn in, and far from
+     it in lightness, so a name in a sentence is never mistaken for a piece
+     of the component: one is monospace text, the other is a drawn rectangle,
+     and they should not also be the same blue. */
+  --accent: #1a56db;
+  /* The same hue laid down as a ground. Mixed toward the page rather than
+     picked by hand, so the two stay related when either is retuned, and so
+     the badge sits on whatever the surface under it happens to be. */
+  --accent-subtle: color-mix(in oklab, var(--accent) 11%, var(--background));
 
   --tok-keyword: #6b5db5;
   --tok-string: #2f7a58;
@@ -50,7 +59,10 @@
   --primary: #d8d8d8;
   --primary-hover: #eaeaea;
   --primary-foreground: #0a0a0a;
-  --accent: #f77fc0;
+  --accent: #8ab4f8;
+  /* More of the hue than the light theme takes. The same 11% against a
+     near-black ground is a grey with a rumour of pink in it. */
+  --accent-subtle: color-mix(in oklab, var(--accent) 18%, var(--background));
 
   --tok-keyword: #a99ce6;
   --tok-string: #7fc9a2;
@@ -83,6 +95,7 @@
   --color-primary-hover: var(--primary-hover);
   --color-primary-foreground: var(--primary-foreground);
   --color-accent: var(--accent);
+  --color-accent-subtle: var(--accent-subtle);
 }
 
 /**

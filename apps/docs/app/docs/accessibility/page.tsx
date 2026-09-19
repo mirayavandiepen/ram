@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { DocsPage } from "@/components/docs/page-shell";
+import { InlineCode } from "@/components/inline-code";
 import { NAV_ITEMS } from "@/lib/nav";
 import { site } from "@/lib/site";
 
@@ -35,12 +36,9 @@ export default function Page() {
           <li key={note}>{note}</li>
         ))}
         <li>
-          <code className="text-foreground font-mono text-[13px]">
-            prefers-reduced-motion
-          </code>{" "}
-          drops the tracking pass. The frame still fades in and out, so the
-          measurement is still shown; it simply arrives without the
-          letter-spacing sweep.
+          <InlineCode>prefers-reduced-motion</InlineCode> drops the tracking
+          pass. The frame still fades in and out, so the measurement is still
+          shown; it simply arrives without the letter-spacing sweep.
         </li>
       </ul>
     </DocsPage>
