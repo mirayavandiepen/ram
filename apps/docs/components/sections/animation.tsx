@@ -4,9 +4,10 @@ import { Ram } from "ram";
 import { useState } from "react";
 
 import { Code } from "../code";
-import { Preview, Sample } from "../preview";
+import { SettingRow, SettingsBrowser } from "../example-browser";
+import { Sample } from "../preview";
 import { Section } from "../section";
-import { Segmented } from "../segmented";
+import { ControlRow, Segmented } from "../segmented";
 
 const MODES = ["Default", "Static", "Persistent"] as const;
 type Mode = (typeof MODES)[number];
@@ -50,37 +51,64 @@ export function Animation() {
       title="Timing"
       description="Control how the frame enters, moves and leaves. The tracking pass loosens the letter-spacing, tightens past where it started, and settles back, without ever moving the text around it."
     >
-      <div className="flex flex-col gap-2">
-        <Segmented
-          label="Mode"
-          value={mode}
-          onChange={setMode}
-          options={MODES}
-        />
-        <Segmented
-          label="delay"
-          value={delay}
-          onChange={setDelay}
-          options={DELAYS.map((v) => ({ value: v, label: `${v} ms` }))}
-        />
-        <Segmented
-          label="duration"
-          value={duration}
-          onChange={setDuration}
-          options={DURATIONS.map((v) => ({ value: v, label: `${v} ms` }))}
-        />
-        <Segmented
-          label="hold"
-          value={hold}
-          onChange={setHold}
-          options={HOLDS.map((v) => ({ value: v, label: `${v} ms` }))}
-        />
-      </div>
-      <Preview resetKey={JSON.stringify(props)}>
+      <SettingsBrowser
+        resetKey={JSON.stringify(props)}
+        controls={
+          <>
+            <SettingRow>
+              <ControlRow label="Mode">
+                <Segmented
+                  hideLabel
+                  label="Mode"
+                  value={mode}
+                  onChange={setMode}
+                  options={MODES}
+                />
+              </ControlRow>
+            </SettingRow>
+            <SettingRow>
+              <ControlRow label="Delay">
+                <Segmented
+                  hideLabel
+                  label="Delay"
+                  value={delay}
+                  onChange={setDelay}
+                  options={DELAYS.map((v) => ({ value: v, label: `${v} ms` }))}
+                />
+              </ControlRow>
+            </SettingRow>
+            <SettingRow>
+              <ControlRow label="Duration">
+                <Segmented
+                  hideLabel
+                  label="Duration"
+                  value={duration}
+                  onChange={setDuration}
+                  options={DURATIONS.map((v) => ({
+                    value: v,
+                    label: `${v} ms`,
+                  }))}
+                />
+              </ControlRow>
+            </SettingRow>
+            <SettingRow>
+              <ControlRow label="Hold">
+                <Segmented
+                  hideLabel
+                  label="Hold"
+                  value={hold}
+                  onChange={setHold}
+                  options={HOLDS.map((v) => ({ value: v, label: `${v} ms` }))}
+                />
+              </ControlRow>
+            </SettingRow>
+          </>
+        }
+      >
         <Sample>
           built to <Ram {...props}>delight</Ram>
         </Sample>
-      </Preview>
+      </SettingsBrowser>
       <Code label="tsx">{code}</Code>
     </Section>
   );

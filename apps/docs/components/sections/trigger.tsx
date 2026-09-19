@@ -4,10 +4,10 @@ import { Ram } from "ram";
 import { useState } from "react";
 
 import { Code } from "../code";
-import { Preview, Sample } from "../preview";
+import { ExampleBrowser } from "../example-browser";
+import { Sample } from "../preview";
 import { PRESS } from "../press";
 import { Section } from "../section";
-import { Segmented } from "../segmented";
 
 const TRIGGERS = ["mount", "hover", "click", "controlled"] as const;
 type Trigger = (typeof TRIGGERS)[number];
@@ -32,15 +32,17 @@ export function Trigger() {
       title="Trigger"
       description="Decide when the sequence plays. On mount is the default; hover and click need nothing else wired up, and a controlled frame follows a boolean."
     >
-      <Segmented
+      <ExampleBrowser
+        label="Trigger"
         value={trigger}
         onChange={(next) => {
           setTrigger(next);
           setActive(false);
         }}
         options={TRIGGERS}
-      />
-      <Preview resetKey={trigger} replay={trigger === "mount"}>
+        resetKey={trigger}
+        replay={trigger === "mount"}
+      >
         {trigger === "mount" ? (
           <Sample>
             built to <Ram delay={300}>delight</Ram>
@@ -70,7 +72,7 @@ export function Trigger() {
             </button>
           </div>
         )}
-      </Preview>
+      </ExampleBrowser>
       <Code label="tsx">{CODE[trigger]}</Code>
     </Section>
   );

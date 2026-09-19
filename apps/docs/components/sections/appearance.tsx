@@ -4,9 +4,9 @@ import { Ram } from "ram";
 import { useState } from "react";
 
 import { Code } from "../code";
-import { Preview, Sample } from "../preview";
+import { ExampleBrowser } from "../example-browser";
+import { Sample } from "../preview";
 import { Section } from "../section";
-import { Segmented } from "../segmented";
 
 const VARIANTS = {
   Default: { code: `<Ram>delight</Ram>`, props: {} },
@@ -48,19 +48,20 @@ export function Appearance() {
       title="Parts of the frame"
       description="Every part of the frame is optional. Drawn in selection blue by default, or in any colour you name."
     >
-      <Segmented
+      <ExampleBrowser
+        label="Variant"
         value={variant}
         onChange={setVariant}
         options={Object.keys(VARIANTS) as Variant[]}
-      />
-      <Preview resetKey={variant}>
+        resetKey={variant}
+      >
         <Sample>
           built to{" "}
           <Ram delay={300} persistent {...current.props}>
             delight
           </Ram>
         </Sample>
-      </Preview>
+      </ExampleBrowser>
       <Code label="tsx">{current.code}</Code>
     </Section>
   );

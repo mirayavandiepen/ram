@@ -19,6 +19,7 @@ export function Preview({
   resetKey = "",
   replay = true,
   onReplay,
+  framed = true,
   className = "",
 }: {
   children: ReactNode;
@@ -31,6 +32,13 @@ export function Preview({
    * two counters for one remount is one too many.
    */
   onReplay?: () => void;
+  /**
+   * Draws its own border and corners. A stage sharing a surface with the
+   * control that drives it has them drawn by that surface instead, and a
+   * second border inside the first is the line that makes a panel look
+   * assembled rather than made.
+   */
+  framed?: boolean;
   className?: string;
 }) {
   const [run, setRun] = useState(0);
@@ -59,7 +67,9 @@ export function Preview({
   return (
     <div
       ref={stageRef}
-      className={`border-border bg-surface relative flex min-h-[168px] items-center justify-center overflow-hidden rounded-lg border px-6 py-10 ${className}`}
+      className={`bg-surface relative flex min-h-[168px] items-center justify-center overflow-hidden px-6 py-10 ${
+        framed ? "border-border rounded-lg border" : ""
+      } ${className}`}
     >
       <div key={`${resetKey}:${run}:${seen}`} className="contents">
         {children}
