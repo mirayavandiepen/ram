@@ -48,7 +48,7 @@ export function Footer() {
             rel="noreferrer"
             aria-label={link.label}
             title={link.label}
-            className={`text-faint hover:bg-surface-hover hover:text-foreground grid h-7 min-w-7 place-items-center rounded-full px-1.5 ${PRESS}`}
+            className={`text-faint hover:bg-surface-hover hover:text-foreground grid h-10 min-w-10 place-items-center rounded-full px-2 ${PRESS}`}
           >
             {link.icon}
           </a>

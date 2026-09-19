@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import { Code } from "../code";
 import { Preview } from "../preview";
+import { HIT_AREA, PRESS } from "../press";
 import { ControlRow, Segmented } from "../segmented";
 
 const LABELS = [
@@ -135,7 +136,7 @@ export function Playground() {
               onClick={reset}
               tabIndex={dirty ? 0 : -1}
               aria-hidden={!dirty}
-              className={`control text-faint hover:text-foreground h-7 rounded-md px-2 text-[12px] ${
+              className={`${HIT_AREA} ${PRESS} text-faint hover:text-foreground h-7 rounded-md px-2 text-[12px] ${
                 dirty ? "opacity-100" : "pointer-events-none opacity-0"
               }`}
             >
@@ -186,12 +187,23 @@ export function Playground() {
                 />
               </ControlRow>
             </div>
-            <div className="px-3.5 py-2.5">
+            {/* Less vertical padding than its neighbours, so the row still
+                measures the same: a 40px target around the dots is taller
+                than a segmented track, and the panel reads as an even stack
+                only if the difference comes back out of the padding. */}
+            <div className="px-3.5 py-2">
               <ControlRow label="Colour">
                 <div
                   role="group"
                   aria-label="Colour"
-                  className="flex items-center gap-1"
+                  // Butted together rather than spaced: each target is a
+                  // 40px square around a 14px dot, and a gap would push the
+                  // row wider than the narrowest panel can hold.
+                  // Pulled right by the 13px of padding between the last
+                  // dot and the edge of its target, so the swatches end on
+                  // the same line as the segmented tracks above them rather
+                  // than stopping short of it.
+                  className="-mr-[13px] flex items-center"
                 >
                   {COLORS.map((option) => {
                     const selected = option.value === color;
@@ -206,7 +218,7 @@ export function Playground() {
                           setColor(option.value);
                           bump();
                         }}
-                        className="control group grid size-7 place-items-center rounded-full active:scale-[0.9] motion-reduce:active:scale-100"
+                        className={`${PRESS} group grid size-10 place-items-center rounded-full`}
                       >
                         {/* The ring is the swatch's own colour, drawn a hair
                             off the dot the way a design tool marks the
