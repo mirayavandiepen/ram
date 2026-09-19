@@ -112,7 +112,7 @@ export function MobileNav() {
         <div
           id="docs-mobile-nav"
           ref={panel}
-          className={`border-border bg-surface ease-out-quart absolute inset-x-0 top-0 max-h-full overflow-y-auto border-b p-4 shadow-[0_12px_32px_rgba(0,0,0,0.12)] transition-[opacity,translate] duration-150 motion-reduce:transition-[opacity] ${
+          className={`border-border bg-surface ease-out-quart shadow-overlay absolute inset-x-0 top-0 max-h-full overflow-y-auto border-b p-4 transition-[opacity,translate] duration-150 motion-reduce:transition-[opacity] ${
             open ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0"
           }`}
         >

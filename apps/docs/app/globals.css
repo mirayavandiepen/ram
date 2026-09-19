@@ -42,34 +42,84 @@
   --tok-attr: #8a5a17;
   --tok-comment: #9a9a9a;
   --tok-punct: #7a7a7a;
+
+  --selection: color-mix(in oklab, var(--foreground) 12%, transparent);
+
+  /* Depth, as two named recipes rather than a shadow spelled out at each
+     call site: one for a control lifted a millimetre off its track, one for
+     a layer floating over the page. */
+  --shadow-raised: 0 1px 2px rgba(0, 0, 0, 0.05), 0 0 0 1px var(--border);
+  --shadow-overlay:
+    0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 28px rgba(0, 0, 0, 0.1);
 }
 
+/**
+ * Dark is not the light palette inverted: it is a ladder of lightness.
+ *
+ * On a near-black page every surface laid on it has to be *lighter* than the
+ * page to read as sitting above it — a shadow has nothing to darken, so
+ * elevation is carried by lightness and by the line around it. The ground is
+ * therefore lifted off pitch black to leave room for that ladder above it,
+ * and every rung is a measured step in OKLCH lightness rather than a hex
+ * picked by eye, so a card, the code block inside it and the border around
+ * both stay in the same order at every step.
+ *
+ * The greys carry a trace of blue (chroma 0.005-0.008 at hue 265). Far too
+ * little to read as a colour; enough that a wide expanse of it reads as a
+ * surface rather than as switched-off screen.
+ */
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --muted: #8f8f8f;
-  --faint: #5c5c5c;
-  --border: #232323;
-  --border-strong: #333333;
-  --code-bg: #111111;
-  --surface: #0f0f0f;
-  --surface-hover: #1a1a1a;
+  /* L 0.185 — lifted off #0a0a0a. Pure black is a floor with nothing under
+     it, and it flattens everything laid on top. */
+  --background: #121314;
+  --foreground: #ecedef;
+  /* Both raised: the old pair cleared 3:1 and 6:1 against the old ground,
+     which is legible but joyless for a whole column of prose and section
+     labels. These clear 7.8:1 and 5:1. */
+  --muted: #a6a8ac;
+  --faint: #82858a;
+  /* The line is the main thing separating a card from the page, so it does
+     the most work of any value here: 1.7:1 against the ground where the old
+     one managed 1.26:1, which on most screens was no line at all. */
+  --border: #3a3c40;
+  --border-strong: #56585d;
+  /* A well, not a card: below the surface it sits in, above the page. */
+  --code-bg: #1a1b1d;
+  --surface: #202124;
+  --surface-hover: #2c2e31;
   /* The same step back from the foreground, going the other way. */
-  --primary: #d8d8d8;
-  --primary-hover: #eaeaea;
-  --primary-foreground: #0a0a0a;
+  --primary: #d0d1d4;
+  --primary-hover: #e7e8ea;
+  --primary-foreground: #121314;
   --accent: #8ab4f8;
   /* More of the hue than the light theme takes. The same 11% against a
      near-black ground is a grey with a rumour of pink in it. */
   --accent-subtle: color-mix(in oklab, var(--accent) 18%, var(--background));
+  /* Selection has to survive being laid over a dark ground, where a wash of
+     white this faint disappears. */
+  --selection: color-mix(in oklab, var(--foreground) 22%, transparent);
 
   --tok-keyword: #a99ce6;
   --tok-string: #7fc9a2;
   --tok-tag: #e8867f;
   --tok-attr: #d9a85a;
-  --tok-comment: #6a6a6a;
-  --tok-punct: #8c8c8c;
+  /* Comments and punctuation are meant to recede, not to vanish: the old
+     pair sat at 3.2:1 and 5.1:1 against the code ground. */
+  --tok-comment: #85888d;
+  --tok-punct: #a0a2a7;
+
+  /* A cast shadow needs something to darken, and on a dark ground there is
+     nothing left to take away. So the shadows deepen — enough to hold the
+     halo of dimmed page around a floating layer — and each surface adds a
+     hairline of its own light along the top edge, which is what actually
+     separates it from the page. */
+  --shadow-raised:
+    0 1px 2px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--border),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --shadow-overlay:
+    0 2px 4px rgba(0, 0, 0, 0.4), 0 16px 40px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 @theme inline {
@@ -96,6 +146,8 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-accent: var(--accent);
   --color-accent-subtle: var(--accent-subtle);
+  --shadow-raised: var(--shadow-raised);
+  --shadow-overlay: var(--shadow-overlay);
 }
 
 /**
@@ -136,7 +188,7 @@ body {
 }
 
 ::selection {
-  background: color-mix(in oklab, var(--foreground) 12%, transparent);
+  background: var(--selection);
 }
 
 /* The offset ring only. No `border-radius` here: this rule is unlayered and

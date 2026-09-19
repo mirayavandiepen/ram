@@ -177,7 +177,7 @@ export function PageMenu() {
         role="menu"
         aria-label="More"
         inert={!open}
-        className={`border-border bg-surface ease-out-quart absolute right-0 top-[calc(100%+8px)] z-20 w-[212px] origin-top-right rounded-xl border p-1 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_28px_rgba(0,0,0,0.10)] transition-[opacity,scale,translate] duration-150 motion-reduce:transition-[opacity] ${
+        className={`border-border bg-surface ease-out-quart shadow-overlay absolute right-0 top-[calc(100%+8px)] z-20 w-[212px] origin-top-right rounded-xl border p-1 transition-[opacity,scale,translate] duration-150 motion-reduce:transition-[opacity] ${
           open
             ? "scale-100 opacity-100"
             : "pointer-events-none -translate-y-1 scale-[0.97] opacity-0"

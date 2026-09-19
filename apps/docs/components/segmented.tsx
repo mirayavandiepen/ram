@@ -133,7 +133,7 @@ export function Segmented<T extends string>({
               width: thumb.width,
               height: thumb.height,
             }}
-            className="bg-surface ease-out-quart pointer-events-none absolute left-0 top-0 rounded-md shadow-[0_1px_2px_rgba(0,0,0,0.05),0_0_0_1px_var(--border)] transition-[transform,width] duration-200 motion-reduce:transition-none"
+            className="bg-surface ease-out-quart shadow-raised pointer-events-none absolute left-0 top-0 rounded-md transition-[transform,width] duration-200 motion-reduce:transition-none"
           />
         ) : null}
         {options.map((option) => {
