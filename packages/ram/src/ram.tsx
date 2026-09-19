@@ -61,6 +61,10 @@ export type RamProps = {
   /** `hollow` rings each handle around the page colour, the way a design tool
    * draws one; `solid` fills it with the frame colour. */
   handleFill?: RamHandleFill;
+  /** What a hollow handle is filled with. Defaults to the page colour — white
+   * on a light scheme, near-black on a dark one — which is what makes the ring
+   * read as a handle rather than a dot. Ignored when handles are solid. */
+  handleBackground?: string;
   /** Thickness of the outline and of the handle rings, in px. */
   lineWidth?: number;
   /** `tracking` breathes the letter-spacing while the frame is up; `static` only fades. */
@@ -154,6 +158,7 @@ export function Ram({
   handles = true,
   handleSize,
   handleFill = "hollow",
+  handleBackground,
   lineWidth,
   animation = "tracking",
   trigger: triggerProp,
@@ -252,6 +257,9 @@ export function Ram({
   if (color !== undefined) vars["--ram-color"] = color;
   if (lineWidth !== undefined) vars["--ram-line-width"] = `${lineWidth}px`;
   if (handleSize !== undefined) vars["--ram-handle-size"] = `${handleSize}px`;
+  if (handleBackground !== undefined) {
+    vars["--ram-handle-fill"] = handleBackground;
+  }
   if (labelColor !== undefined) vars["--ram-label-color"] = labelColor;
   if (labelBackground !== undefined) {
     vars["--ram-label-background"] = labelBackground;
