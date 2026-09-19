@@ -139,10 +139,14 @@ body {
   background: color-mix(in oklab, var(--foreground) 12%, transparent);
 }
 
+/* The offset ring only. No `border-radius` here: this rule is unlayered and
+   so beats every Tailwind `rounded-*` utility, which sits in `@layer
+   utilities` — a radius set here would square off a `rounded-full` pill the
+   moment it took focus. Browsers already draw the outline around the
+   element's own corners. */
 :focus-visible {
   outline: 2px solid var(--foreground);
   outline-offset: 2px;
-  border-radius: 6px;
 }
 
 .tok-keyword {
