@@ -65,8 +65,12 @@ export type RamProps = {
    * on a light scheme, near-black on a dark one — which is what makes the ring
    * read as a handle rather than a dot. Ignored when handles are solid. */
   handleBackground?: string;
-  /** Thickness of the outline and of the handle rings, in px. */
+  /** Thickness of the outline, in px. */
   lineWidth?: number;
+  /** Thickness of the handle rings, in px. Design tools draw a handle with a
+   * hairline however heavy the selection stroke is, so this stays at 1 unless
+   * you say otherwise. Ignored when handles are solid. */
+  handleLineWidth?: number;
   /** `tracking` breathes the letter-spacing while the frame is up; `static` only fades. */
   animation?: RamAnimation;
   /** What starts the sequence. Defaults to `manual` when `active` is provided. */
@@ -160,6 +164,7 @@ export function Ram({
   handleFill = "hollow",
   handleBackground,
   lineWidth,
+  handleLineWidth,
   animation = "tracking",
   trigger: triggerProp,
   active,
@@ -259,6 +264,9 @@ export function Ram({
   if (handleSize !== undefined) vars["--ram-handle-size"] = `${handleSize}px`;
   if (handleBackground !== undefined) {
     vars["--ram-handle-fill"] = handleBackground;
+  }
+  if (handleLineWidth !== undefined) {
+    vars["--ram-handle-line-width"] = `${handleLineWidth}px`;
   }
   if (labelColor !== undefined) vars["--ram-label-color"] = labelColor;
   if (labelBackground !== undefined) {
@@ -664,6 +672,8 @@ const layerStyle: CSSProperties = {
  * handles and label measure from the stroke instead of a padding box already
  * inset by its width. Held below full strength so the guide stays subordinate
  * to the text it is measuring.
+ *
+ * `--ram-line-width` is this edge only. The handles take `--ram-handle-line-width`.
  */
 const outlineStyle: CSSProperties = {
   position: "absolute",
@@ -677,6 +687,11 @@ const outlineStyle: CSSProperties = {
  * Hollow by default, which is how every design tool draws a handle — the ring
  * reads as a grabbable corner, and the pale centre keeps the mark legible on
  * top of the text it is sitting over.
+ *
+ * The ring has a thickness of its own rather than inheriting `--ram-line-width`.
+ * A design tool draws a hairline handle however heavy the selection stroke is,
+ * and it has to: the ring is 6px square, so a 3px stroke on both sides leaves
+ * nothing of the centre and the handle stops being hollow at all.
  */
 const handleBase: CSSProperties = {
   position: "absolute",
@@ -689,7 +704,7 @@ const handleStyles: Record<RamHandleFill, CSSProperties> = {
   hollow: {
     ...handleBase,
     background: "var(--ram-handle-fill, light-dark(#fff, #111))",
-    border: "var(--ram-line-width, 1px) solid currentColor",
+    border: "var(--ram-handle-line-width, 1px) solid currentColor",
   },
   solid: { ...handleBase, background: "currentColor" },
 };
