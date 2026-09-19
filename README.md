@@ -4,8 +4,7 @@
 
 **Design-tool selection frames around text, for React.**
 
-[![npm](https://img.shields.io/badge/npm-ram-0d99ff?style=flat-square)](https://www.npmjs.com/package/ram)
-[![docs](https://img.shields.io/badge/docs-ram.dev-0d99ff?style=flat-square)](https://ram.dev)
+[![npm](https://img.shields.io/npm/v/@mirayavandiepen/ram?style=flat-square&color=0d99ff)](https://www.npmjs.com/package/@mirayavandiepen/ram)
 [![license](https://img.shields.io/badge/license-MIT-0d99ff?style=flat-square)](LICENSE)
 
 <!-- Drop the demo recording here: drag an .mp4 into a GitHub issue and paste the asset URL. -->
@@ -15,13 +14,13 @@
 ## Install
 
 ```bash
-pnpm add ram
+pnpm add @mirayavandiepen/ram
 ```
 
 ## Usage
 
 ```tsx
-import { Ram } from "ram";
+import { Ram } from "@mirayavandiepen/ram";
 
 <h1>
   built to <Ram>delight</Ram>
@@ -39,7 +38,7 @@ A hairline outline, four corner handles and a live `width × height` label. Zero
 
 ## Docs
 
-Every prop and CSS variable: [ram.dev](https://ram.dev) · [`packages/ram`](packages/ram/README.md)
+Every prop and CSS variable: [`packages/ram`](packages/ram/README.md)
 
 ## Development
 
@@ -49,7 +48,7 @@ pnpm dev        # library in watch mode + docs at localhost:3000
 pnpm build      # library, then docs
 ```
 
-`packages/ram` is the library, `apps/docs` is ram.dev. The docs build on the library's `dist`, so it builds first. Publish with `pnpm build && npm publish` in `packages/ram`.
+`packages/ram` is the library, `apps/docs` is the docs site. The docs build on the library's `dist`, so it builds first. Publish with `pnpm build && npm publish` in `packages/ram`.
 
 ---
 

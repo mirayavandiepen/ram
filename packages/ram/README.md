@@ -7,11 +7,11 @@ Wrap a word and it gets a hairline outline, four corner handles and a live `widt
 Swedish for "frame" — pronounced `/rɑːm/`, like _rahm_, rhyming with "calm".
 
 ```bash
-pnpm add ram
+pnpm add @mirayavandiepen/ram
 ```
 
 ```tsx
-import { Ram } from "ram";
+import { Ram } from "@mirayavandiepen/ram";
 
 export default function Example() {
   return (
@@ -85,6 +85,6 @@ Zero dependencies · inherits the parent's typography · respects `prefers-reduc
 
 ## Documentation
 
-Full API reference and live examples: **[ram.dev](https://ram.dev)**
+Source, issues and live examples: **[github.com/mirayavandiepen/ram](https://github.com/mirayavandiepen/ram)**
 
 MIT © [Miraya van Diepen](https://github.com/mirayavandiepen)
