@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 
-import { ThemeToggle } from "@/components/theme-toggle";
 import { site } from "@/lib/site";
 import { THEME_SCRIPT } from "@/lib/theme";
 
@@ -14,7 +13,9 @@ const description = `Swedish for "${site.meaning}". A tiny React component for a
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: site.name,
+  // A template so every documentation page names itself in the tab and in a
+  // search result without each one restating the library's name by hand.
+  title: { default: site.name, template: `%s — ${site.name}` },
   description,
   keywords: ["react", "animation", "selection", "frame", "figma", "typography"],
   authors: [{ name: site.author }],
@@ -48,12 +49,10 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
-      <body>
-        <div className="fixed right-4 top-4 z-10">
-          <ThemeToggle />
-        </div>
-        {children}
-      </body>
+      {/* The theme control is placed by each layout rather than here: on the
+          landing page it floats at the top right, and in the docs it belongs
+          at the foot of the sidebar with the other page-level controls. */}
+      <body>{children}</body>
     </html>
   );
 }

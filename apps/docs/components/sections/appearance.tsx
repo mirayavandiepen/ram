@@ -18,6 +18,14 @@ const VARIANTS = {
     code: `<Ram handles={false}>delight</Ram>`,
     props: { handles: false },
   },
+  "Solid handles": {
+    code: `<Ram handleFill="solid">delight</Ram>`,
+    props: { handleFill: "solid" },
+  },
+  Thicker: {
+    code: `<Ram lineWidth={2} handleSize={8}>\n  delight\n</Ram>`,
+    props: { lineWidth: 2, handleSize: 8 },
+  },
   "Outline only": {
     code: `<Ram label={false} handles={false}>\n  delight\n</Ram>`,
     props: { label: false, handles: false },
@@ -36,8 +44,8 @@ export function Appearance() {
 
   return (
     <Section
-      id="appearance"
-      title="Appearance"
+      id="parts"
+      title="Parts of the frame"
       description="Every part of the frame is optional. Monochrome by default, in whatever colour the text already is."
     >
       <Segmented

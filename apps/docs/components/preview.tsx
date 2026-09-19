@@ -18,11 +18,19 @@ export function Preview({
   children,
   resetKey = "",
   replay = true,
+  onReplay,
   className = "",
 }: {
   children: ReactNode;
   resetKey?: string;
   replay?: boolean;
+  /**
+   * Hands the replay back to the owner, for a stage whose example is built
+   * from state the stage cannot see. The owner is then responsible for
+   * changing `resetKey`; the button stops keeping a count of its own, because
+   * two counters for one remount is one too many.
+   */
+  onReplay?: () => void;
   className?: string;
 }) {
   const [run, setRun] = useState(0);
@@ -60,7 +68,11 @@ export function Preview({
         <button
           type="button"
           aria-label="Replay"
-          onClick={() => setRun((n) => n + 1)}
+          // Named as well as labelled: the icon is the only thing on the
+          // stage that is not the example, and a reader who hovers it should
+          // not have to guess what it does.
+          title="Replay"
+          onClick={() => (onReplay ? onReplay() : setRun((n) => n + 1))}
           className={`text-faint hover:bg-surface-hover hover:text-foreground absolute right-2 top-2 grid size-7 place-items-center rounded-md ${ABSOLUTE_HIT_AREA} ${PRESS}`}
         >
           <svg

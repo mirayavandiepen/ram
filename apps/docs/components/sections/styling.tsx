@@ -7,12 +7,12 @@ import { Preview, Sample } from "../preview";
 import { Reference } from "../reference";
 import { Section } from "../section";
 
-export function Styling() {
+export function Typography() {
   return (
     <Section
-      id="styling"
-      title="Styling"
-      description="Ram inherits everything typographic from its parent. It sets no font size, family, weight or line height of its own, so it drops into any heading and follows it at every breakpoint."
+      id="typography"
+      title="Typography is inherited"
+      description="Ram sets no font size, family, weight or line height of its own, so it drops into any heading and follows it at every breakpoint."
     >
       <Preview>
         <div className="flex flex-col items-center gap-12">
@@ -35,10 +35,17 @@ export function Styling() {
   built to <Ram>delight</Ram>
 </h1>
 `}</Code>
-      <p className="text-muted text-[15px]">
-        The chrome is tuned with CSS variables, set on the component or any
-        ancestor.
-      </p>
+    </Section>
+  );
+}
+
+export function CustomProperties() {
+  return (
+    <Section
+      id="custom-properties"
+      title="Custom properties"
+      description="The chrome is tuned with CSS variables, set on the component or on any ancestor. Set them on a container and every frame inside it follows."
+    >
       <Reference nameLabel="Variable" rows={CSS_VARIABLES} />
       <Preview>
         <Sample>

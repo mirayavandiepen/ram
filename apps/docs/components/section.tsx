@@ -12,7 +12,7 @@ export function Section({
   children: ReactNode;
 }) {
   return (
-    <section id={id} className="scroll-mt-16">
+    <section id={id} className="scroll-mt-24">
       <h2 className="text-[17px] font-medium tracking-[-0.01em]">
         <a href={`#${id}`} className="text-foreground no-underline">
           {title}

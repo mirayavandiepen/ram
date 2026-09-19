@@ -33,6 +33,9 @@ Zero dependencies. Inherits the parent's typography. Respects `prefers-reduced-m
 | `label`         | `boolean \| (size) => string`               | `true`       |
 | `labelPosition` | `"top" \| "bottom" \| "top-left" \| …`      | `"top"`      |
 | `handles`       | `boolean`                                   | `true`       |
+| `handleSize`    | `number` (px)                               | `6`          |
+| `handleFill`    | `"hollow" \| "solid"`                       | `"hollow"`   |
+| `lineWidth`     | `number` (px)                               | `1`          |
 | `animation`     | `"tracking" \| "static"`                    | `"tracking"` |
 | `trigger`       | `"mount" \| "hover" \| "click" \| "manual"` | `"mount"`    |
 | `active`        | `boolean`                                   |              |
@@ -45,9 +48,10 @@ Zero dependencies. Inherits the parent's typography. Respects `prefers-reduced-m
 
 ```css
 --ram-color             /* outline, handles and label; defaults to currentColor */
---ram-line-width        /* 1px */
+--ram-line-width        /* 1px, outline and handle rings */
 --ram-outline-opacity   /* 0.6 */
 --ram-handle-size       /* 6px */
+--ram-handle-fill       /* centre of a hollow handle; white on light, near-black on dark */
 --ram-inset             /* 4px, how far the outline sits outside the text */
 --ram-label-background  /* defaults to the frame colour */
 --ram-label-color       /* white on light, near-black on dark */

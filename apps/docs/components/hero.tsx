@@ -6,7 +6,7 @@ import { useState } from "react";
 import { site } from "@/lib/site";
 
 import { PageMenu } from "./page-menu";
-import { PRESS } from "./press";
+import { BUTTON_MD, BUTTON_PRIMARY, BUTTON_SECONDARY } from "./button";
 
 export function Hero() {
   const [run, setRun] = useState(0);
@@ -40,7 +40,7 @@ export function Hero() {
         <button
           type="button"
           onClick={() => setRun((n) => n + 1)}
-          className={`bg-primary text-primary-foreground hover:bg-primary-hover h-9 rounded-full px-4 text-[14px] font-medium ${PRESS}`}
+          className={`${BUTTON_PRIMARY} ${BUTTON_MD}`}
         >
           Render
         </button>
@@ -48,7 +48,7 @@ export function Hero() {
           href={site.github}
           target="_blank"
           rel="noreferrer"
-          className={`border-border hover:bg-surface-hover flex h-9 items-center gap-1.5 rounded-full border px-4 text-[14px] font-medium ${PRESS}`}
+          className={`${BUTTON_SECONDARY} ${BUTTON_MD}`}
         >
           <svg
             width="14"

@@ -58,6 +58,25 @@ export const PROPS: ReferenceRow[] = [
     description: "Draw the four corner handles.",
   },
   {
+    name: "handleSize",
+    type: "number",
+    default: "6",
+    description: "Width and height of each corner handle, in px.",
+  },
+  {
+    name: "handleFill",
+    type: `"hollow" | "solid"`,
+    default: `"hollow"`,
+    description:
+      "Ring each handle around the page colour, or fill it with the frame colour.",
+  },
+  {
+    name: "lineWidth",
+    type: "number",
+    default: "1",
+    description: "Thickness of the outline and of the handle rings, in px.",
+  },
+  {
     name: "animation",
     type: `"tracking" | "static"`,
     default: `"tracking"`,
@@ -120,7 +139,7 @@ export const CSS_VARIABLES: ReferenceRow[] = [
   {
     name: "--ram-line-width",
     default: "1px",
-    description: "Thickness of the outline.",
+    description: "Thickness of the outline and of the handle rings.",
   },
   {
     name: "--ram-outline-opacity",
@@ -132,6 +151,11 @@ export const CSS_VARIABLES: ReferenceRow[] = [
     name: "--ram-handle-size",
     default: "6px",
     description: "Width and height of each corner handle.",
+  },
+  {
+    name: "--ram-handle-fill",
+    default: "light-dark(#fff, #111)",
+    description: "Centre of a hollow handle. Ignored when handles are solid.",
   },
   {
     name: "--ram-inset",

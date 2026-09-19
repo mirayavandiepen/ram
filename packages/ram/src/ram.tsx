@@ -35,6 +35,8 @@ export type RamSize = {
 export type RamLabelPosition =
   "top" | "bottom" | "top-left" | "top-right" | "bottom-left" | "bottom-right";
 
+export type RamHandleFill = "hollow" | "solid";
+
 export type RamAnimation = "tracking" | "static";
 
 export type RamTrigger = "mount" | "hover" | "click" | "manual";
@@ -54,6 +56,13 @@ export type RamProps = {
   labelPosition?: RamLabelPosition;
   /** Draw the four corner handles. */
   handles?: boolean;
+  /** Width and height of each corner handle, in px. */
+  handleSize?: number;
+  /** `hollow` rings each handle around the page colour, the way a design tool
+   * draws one; `solid` fills it with the frame colour. */
+  handleFill?: RamHandleFill;
+  /** Thickness of the outline and of the handle rings, in px. */
+  lineWidth?: number;
   /** `tracking` breathes the letter-spacing while the frame is up; `static` only fades. */
   animation?: RamAnimation;
   /** What starts the sequence. Defaults to `manual` when `active` is provided. */
@@ -105,6 +114,16 @@ type Phase = "hidden" | "pending" | "entering" | "shown" | "leaving";
 const formatSize = ({ width, height }: RamSize) =>
   `${Math.round(width)} × ${Math.round(height)}`;
 
+/**
+ * The centred label is placed at a whole-pixel origin and then pulled back by
+ * half its own width, so an odd or fractional width lands it on a half pixel.
+ * The padding is symmetric either way, but the glyphs are not: the browser
+ * snaps them off that half pixel in one direction, and the chip reads as
+ * tighter on its left. Rounding up to an even number of pixels keeps both
+ * edges on the grid, at a cost of at most a pixel of width.
+ */
+const evenCeil = (n: number) => 2 * Math.ceil(n / 2);
+
 const same = (a: Measurement | null, b: Measurement) =>
   a !== null &&
   Math.abs(a.width - b.width) < RESIZE_EPSILON &&
@@ -128,6 +147,9 @@ export function Ram({
   label = true,
   labelPosition = "top",
   handles = true,
+  handleSize,
+  handleFill = "hollow",
+  lineWidth,
   animation = "tracking",
   trigger: triggerProp,
   active,
@@ -222,6 +244,12 @@ export function Ram({
     ...(color !== undefined
       ? ({ "--ram-color": color } as CSSProperties)
       : null),
+    ...(handleSize !== undefined
+      ? ({ "--ram-handle-size": `${handleSize}px` } as CSSProperties)
+      : null),
+    ...(lineWidth !== undefined
+      ? ({ "--ram-line-width": `${lineWidth}px` } as CSSProperties)
+      : null),
     ...style,
   };
 
@@ -259,7 +287,7 @@ export function Ram({
       >
         <span data-ram-outline="" style={outlineStyle} />
         {handles
-          ? HANDLE_STYLES.map((handle, i) => (
+          ? HANDLE_STYLES[handleFill].map((handle, i) => (
               <span key={i} data-ram-handle="" style={handle} />
             ))
           : null}
@@ -321,6 +349,10 @@ function createController({
 }: ControllerArgs) {
   let phase: Phase = "hidden";
   let observer: ResizeObserver | undefined;
+  /**
+   * The resting trailing letter-space, in px. See `applyTrail`.
+   */
+  let trail = 0;
   const tweens = new Set<Tween>();
   const timers = new Set<number>();
 
@@ -333,19 +365,35 @@ function createController({
     const root = rootRef.current;
     if (!root) return null;
     const rect = root.getBoundingClientRect();
+    const computed = getComputedStyle(root);
     const bleed = contentOverhang(root, rect.height);
     const inset =
-      Number.parseFloat(
-        getComputedStyle(root).getPropertyValue("--ram-inset"),
-      ) || DEFAULT_INSET;
+      Number.parseFloat(computed.getPropertyValue("--ram-inset")) ||
+      DEFAULT_INSET;
+    // Reads "normal" when nothing has set it, which parses to NaN.
+    trail = Number.parseFloat(computed.letterSpacing) || 0;
+    applyTrail(trail);
     const next: Measurement = {
-      width: rect.width,
+      width: rect.width - trail,
       height: rect.height + bleed * 2,
       bleed,
       inset,
     };
     setMeasurement((previous) => (same(previous, next) ? previous : next));
     return next;
+  };
+
+  /**
+   * letter-spacing lands after every character, the last one included, so the
+   * element is one whole letter-space wider than the text inside it. Tracking
+   * is usually negative in display type, which makes that trailing space
+   * negative too: the box ends up narrower than the word, and the frame's
+   * right edge crops into the final glyph while its left edge sits where it
+   * should. The layer reads this back out, so the outline bounds the text
+   * rather than the box, and the label reports the width of the word.
+   */
+  const applyTrail = (px: number) => {
+    rootRef.current?.style.setProperty("--ram-trail", `${px}px`);
   };
 
   const clearWork = () => {
@@ -375,6 +423,7 @@ function createController({
     if (root) {
       root.style.letterSpacing = "";
       root.style.marginRight = "";
+      applyTrail(trail);
     }
   };
 
@@ -397,10 +446,9 @@ function createController({
     // number the word never had.
     const rest = measure();
     if (!rest) return;
-    const computed = getComputedStyle(root);
-    // Reads "normal" when nothing has set it, which parses to NaN.
-    const restSpacing = Number.parseFloat(computed.letterSpacing) || 0;
-    const fontSize = Number.parseFloat(computed.fontSize);
+    // The resting tracking, which `measure` has just read.
+    const restSpacing = trail;
+    const fontSize = Number.parseFloat(getComputedStyle(root).fontSize);
 
     // Freeze the label at its resting width. The number can lose a digit at
     // the tight extreme, and a chip that resizes around a centred origin
@@ -411,7 +459,7 @@ function createController({
     if (badge && badgeText) {
       badgeText.textContent = formatLabel(rest);
       badge.style.width = "";
-      badge.style.width = `${badge.getBoundingClientRect().width}px`;
+      badge.style.width = `${evenCeil(badge.getBoundingClientRect().width)}px`;
     }
 
     layer.style.visibility = "visible";
@@ -466,10 +514,15 @@ function createController({
           // Hand the delta straight back, so the line's total advance never
           // changes and nothing around the text moves.
           root.style.marginRight = `${-delta}px`;
+          // The trailing space tracks with the rest of them, so the right
+          // edge stays off the last glyph for the whole pass.
+          applyTrail(restSpacing + offsetPx);
           // Predicted, never measured: no layout read on the per-frame path.
           if (badgeText) {
             badgeText.textContent = formatLabel({
-              width: rest.width + delta,
+              // One of the deltas went behind the last character rather than
+              // between two of them, and the frame does not draw that one.
+              width: rest.width + delta - offsetPx,
               height: rest.height,
             });
           }
@@ -562,7 +615,10 @@ const LABEL_OFFSET = "var(--ram-label-offset, 6px)";
 const layerStyle: CSSProperties = {
   position: "absolute",
   left: "calc(var(--ram-inset, 4px) * -1)",
-  right: "calc(var(--ram-inset, 4px) * -1)",
+  // `--ram-trail` is the trailing letter-space the element carries and the
+  // text does not. Giving it back here is what makes the gap on the right
+  // match the gap on the left.
+  right: "calc(var(--ram-inset, 4px) * -1 + var(--ram-trail, 0px))",
   color: "var(--ram-color, currentColor)",
   pointerEvents: "none",
   userSelect: "none",
@@ -590,19 +646,39 @@ const outlineStyle: CSSProperties = {
   opacity: "var(--ram-outline-opacity, 0.6)",
 };
 
-/** Solid, and the only part of the frame at full strength: these are what you would grab. */
-const handleStyle: CSSProperties = {
+/**
+ * The only part of the frame at full strength: these are what you would grab.
+ * Hollow by default, which is how every design tool draws a handle — the ring
+ * reads as a grabbable corner, and the pale centre keeps the mark legible on
+ * top of the text it is sitting over.
+ */
+const handleBase: CSSProperties = {
   position: "absolute",
+  boxSizing: "border-box",
   width: HANDLE_SIZE,
   height: HANDLE_SIZE,
-  background: "currentColor",
 };
-const HANDLE_STYLES: CSSProperties[] = [
-  { ...handleStyle, top: HANDLE_OFFSET, left: HANDLE_OFFSET },
-  { ...handleStyle, top: HANDLE_OFFSET, right: HANDLE_OFFSET },
-  { ...handleStyle, bottom: HANDLE_OFFSET, left: HANDLE_OFFSET },
-  { ...handleStyle, bottom: HANDLE_OFFSET, right: HANDLE_OFFSET },
+
+const handleStyles: Record<RamHandleFill, CSSProperties> = {
+  hollow: {
+    ...handleBase,
+    background: "var(--ram-handle-fill, light-dark(#fff, #111))",
+    border: "var(--ram-line-width, 1px) solid currentColor",
+  },
+  solid: { ...handleBase, background: "currentColor" },
+};
+
+const corners = (handle: CSSProperties): CSSProperties[] => [
+  { ...handle, top: HANDLE_OFFSET, left: HANDLE_OFFSET },
+  { ...handle, top: HANDLE_OFFSET, right: HANDLE_OFFSET },
+  { ...handle, bottom: HANDLE_OFFSET, left: HANDLE_OFFSET },
+  { ...handle, bottom: HANDLE_OFFSET, right: HANDLE_OFFSET },
 ];
+
+const HANDLE_STYLES: Record<RamHandleFill, CSSProperties[]> = {
+  hollow: corners(handleStyles.hollow),
+  solid: corners(handleStyles.solid),
+};
 
 const badgeStyle: CSSProperties = {
   position: "absolute",
@@ -645,6 +721,6 @@ function labelPlacement(
   const centre =
     measurement === null
       ? "50%"
-      : (measurement.width + measurement.inset * 2) / 2;
+      : Math.round((measurement.width + measurement.inset * 2) / 2);
   return { ...vertical, left: centre, transform: "translateX(-50%)" };
 }

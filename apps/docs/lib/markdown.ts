@@ -51,7 +51,7 @@ ${site.name} (Swedish for "${site.meaning}", pronounced ${site.ipa}, like "${sit
 
 Wrap your text and ${site.name} handles the measurement, selection outline, corner handles and animation.
 
-- Docs: ${site.url}
+- Docs: ${site.url}/docs
 - Source: ${site.github}
 
 ## Installation
