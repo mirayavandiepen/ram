@@ -88,6 +88,9 @@ ${FENCE}tsx
 <Ram handles={false}>delight</Ram>
 <Ram label={false} handles={false}>delight</Ram>
 <Ram color="#7c3aed">delight</Ram>
+<Ram handleBackground="#fff">delight</Ram>
+<Ram labelBackground="#111" labelColor="#fff">delight</Ram>
+<Ram lineWidth={3} handleLineWidth={2} handleSize={8}>delight</Ram>
 ${FENCE}
 
 ## Measurement label

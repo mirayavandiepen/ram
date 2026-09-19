@@ -71,10 +71,24 @@ export const PROPS: ReferenceRow[] = [
       "Ring each handle around the page colour, or fill it with the frame colour.",
   },
   {
+    name: "handleBackground",
+    type: "string",
+    default: "light-dark(#fff, #111)",
+    description:
+      "What a hollow handle is filled with. Ignored when handles are solid.",
+  },
+  {
     name: "lineWidth",
     type: "number",
     default: "1",
-    description: "Thickness of the outline and of the handle rings, in px.",
+    description: "Thickness of the outline, in px.",
+  },
+  {
+    name: "handleLineWidth",
+    type: "number",
+    default: "1",
+    description:
+      "Thickness of the handle rings, in px. Independent of lineWidth, the way a design tool keeps a handle hairline however heavy the stroke is.",
   },
   {
     name: "animation",
@@ -106,6 +120,18 @@ export const PROPS: ReferenceRow[] = [
     default: "#0d99ff",
     description:
       "Colour of the outline, handles and label. Any CSS colour; selection blue by default.",
+  },
+  {
+    name: "labelColor",
+    type: "string",
+    default: "light-dark(#fff, #111)",
+    description: "Colour of the text inside the label.",
+  },
+  {
+    name: "labelBackground",
+    type: "string",
+    default: "currentColor",
+    description: "Background of the label chip. Follows the frame colour.",
   },
   {
     name: "className",
@@ -140,7 +166,7 @@ export const CSS_VARIABLES: ReferenceRow[] = [
   {
     name: "--ram-line-width",
     default: "1px",
-    description: "Thickness of the outline and of the handle rings.",
+    description: "Thickness of the outline.",
   },
   {
     name: "--ram-outline-opacity",
@@ -157,6 +183,12 @@ export const CSS_VARIABLES: ReferenceRow[] = [
     name: "--ram-handle-fill",
     default: "light-dark(#fff, #111)",
     description: "Centre of a hollow handle. Ignored when handles are solid.",
+  },
+  {
+    name: "--ram-handle-line-width",
+    default: "1px",
+    description:
+      "Thickness of the handle rings, set apart from the outline so a heavy stroke never closes a hollow handle up.",
   },
   {
     name: "--ram-inset",

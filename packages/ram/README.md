@@ -42,15 +42,19 @@ Zero dependencies · inherits the parent's typography · respects `prefers-reduc
 
 ### Appearance
 
-| Prop            | Type                                   | Default     | Description                                             |
-| --------------- | -------------------------------------- | ----------- | ------------------------------------------------------- |
-| `label`         | `boolean \| (size) => string`          | `true`      | Show the `width × height` label, or format it yourself. |
-| `labelPosition` | `"top" \| "bottom" \| "top-left" \| …` | `"top"`     | Where the label sits relative to the outline.           |
-| `handles`       | `boolean`                              | `true`      | Draw the four corner handles.                           |
-| `handleSize`    | `number` (px)                          | `6`         | Width and height of each handle.                        |
-| `handleFill`    | `"hollow" \| "solid"`                  | `"hollow"`  | `hollow` rings each handle the way a design tool does.  |
-| `lineWidth`     | `number` (px)                          | `1`         | Thickness of the outline and handle rings.              |
-| `color`         | `string`                               | `"#0d99ff"` | Outline, handles and label. Any CSS colour.             |
+| Prop               | Type                                   | Default                 | Description                                                 |
+| ------------------ | -------------------------------------- | ----------------------- | ----------------------------------------------------------- |
+| `label`            | `boolean \| (size) => string`          | `true`                  | Show the `width × height` label, or format it yourself.     |
+| `labelPosition`    | `"top" \| "bottom" \| "top-left" \| …` | `"top"`                 | Where the label sits relative to the outline.               |
+| `labelColor`       | `string`                               | `light-dark(#fff,#111)` | Colour of the text inside the label.                        |
+| `labelBackground`  | `string`                               | `currentColor`          | Background of the label chip. Follows the frame colour.     |
+| `handles`          | `boolean`                              | `true`                  | Draw the four corner handles.                               |
+| `handleSize`       | `number` (px)                          | `6`                     | Width and height of each handle.                            |
+| `handleFill`       | `"hollow" \| "solid"`                  | `"hollow"`              | `hollow` rings each handle the way a design tool does.      |
+| `handleBackground` | `string`                               | `light-dark(#fff,#111)` | What a hollow handle is filled with.                        |
+| `lineWidth`        | `number` (px)                          | `1`                     | Thickness of the outline.                                   |
+| `handleLineWidth`  | `number` (px)                          | `1`                     | Thickness of the handle rings, independent of `lineWidth`.  |
+| `color`            | `string`                               | `"#0d99ff"`             | Outline, handles and label. Any CSS colour.                 |
 
 ### Behaviour
 
@@ -67,10 +71,11 @@ Zero dependencies · inherits the parent's typography · respects `prefers-reduc
 
 ```css
 --ram-color             /* outline, handles and label; #0d99ff, selection blue */
---ram-line-width        /* 1px, outline and handle rings */
+--ram-line-width        /* 1px, the outline */
 --ram-outline-opacity   /* 0.6 */
 --ram-handle-size       /* 6px */
 --ram-handle-fill       /* centre of a hollow handle; white on light, near-black on dark */
+--ram-handle-line-width /* 1px, the handle rings; set apart from the outline */
 --ram-inset             /* 4px, how far the outline sits outside the text */
 --ram-label-background  /* defaults to the frame colour */
 --ram-label-color       /* white on light, near-black on dark */
