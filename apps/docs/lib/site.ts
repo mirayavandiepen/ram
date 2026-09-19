@@ -15,10 +15,10 @@ export const site = {
   rhyme: "calm",
   tagline: "A design-tool selection effect for React.",
   url: "https://ram.dev",
-  github: "https://github.com/miraya/ram",
+  github: "https://github.com/mirayavandiepen/ram",
   npm: "https://www.npmjs.com/package/ram",
-  x: "https://x.com/miraya",
+  x: "https://x.com/mirayavandiepen",
   author: "Miraya",
   /** The byline's destination, so the name in the footer goes somewhere. */
-  authorUrl: "https://diepen.io",
+  authorUrl: "https://www.mirayavandiepen.com",
 };
