@@ -1,13 +1,4 @@
-import type { ReactNode } from "react";
-
-export type ReferenceRow = {
-  name: string;
-  /** Omit on every row to drop the type column entirely. */
-  type?: string;
-  /** The value used when the prop is left out. Omit when there is none. */
-  default?: string;
-  description: ReactNode;
-};
+import type { ReferenceRow } from "@/lib/reference";
 
 /**
  * The reference tables: props on one page, CSS variables on another, both

@@ -16,6 +16,7 @@ export const site = {
   tagline: "A design-tool selection effect for React.",
   url: "https://ram.dev",
   github: "https://github.com/miraya/ram",
+  npm: "https://www.npmjs.com/package/ram",
   x: "https://x.com/miraya",
   author: "Miraya",
 };

@@ -5,30 +5,42 @@ import { useState } from "react";
 
 import { site } from "@/lib/site";
 
-import { PRESS } from "./press";
+import { PageMenu } from "./page-menu";
+import { BUTTON_MD, BUTTON_PRIMARY, BUTTON_SECONDARY } from "./button";
 
 export function Hero() {
   const [run, setRun] = useState(0);
 
   return (
-    <header className="flex flex-col items-center pb-28 pt-40 text-center sm:pt-48">
-      <h1 className="whitespace-nowrap text-[44px] font-medium leading-none tracking-[-0.035em] sm:text-[64px]">
+    <header className="pb-28 pt-20 sm:pt-24">
+      {/* The name and what it is, where a reader looks first, with everything
+          that can be done with the page gathered opposite. Centred earlier,
+          they competed with the display line for the same axis; against the
+          left edge they read as the masthead they are. */}
+      <div className="flex items-start justify-between gap-6">
+        <div className="min-w-0">
+          <p className="text-[17px] font-medium leading-tight tracking-[-0.01em]">
+            {site.name}
+          </p>
+          <p className="text-muted mt-1 text-pretty text-[15px] leading-snug">
+            {site.tagline}
+          </p>
+        </div>
+        <PageMenu />
+      </div>
+
+      <h1 className="mt-24 whitespace-nowrap text-center text-[44px] font-medium leading-none tracking-[-0.035em] sm:mt-28 sm:text-[64px]">
         built to{" "}
         <Ram key={run} delay={run === 0 ? 700 : 150}>
           delight
         </Ram>
       </h1>
 
-      <p className="mt-16 text-[17px] font-medium tracking-[-0.01em]">
-        {site.name}
-      </p>
-      <p className="text-muted mt-1 text-[15px]">{site.tagline}</p>
-
-      <div className="mt-6 flex items-center gap-2">
+      <div className="mt-10 flex items-center justify-center gap-2">
         <button
           type="button"
           onClick={() => setRun((n) => n + 1)}
-          className={`bg-primary text-primary-foreground hover:bg-primary-hover h-9 rounded-full px-4 text-[14px] font-medium ${PRESS}`}
+          className={`${BUTTON_PRIMARY} ${BUTTON_MD}`}
         >
           Render
         </button>
@@ -36,7 +48,7 @@ export function Hero() {
           href={site.github}
           target="_blank"
           rel="noreferrer"
-          className={`border-border hover:bg-surface-hover flex h-9 items-center gap-1.5 rounded-full border px-4 text-[14px] font-medium ${PRESS}`}
+          className={`${BUTTON_SECONDARY} ${BUTTON_MD}`}
         >
           <svg
             width="14"
@@ -55,12 +67,14 @@ export function Hero() {
           third thing, and underlined so it reads as the link it is beside two
           controls that are not. Thickness and position come from the font's
           own metrics, so the rule sits where the typeface intends it. */}
-      <a
-        href="#installation"
-        className="text-muted decoration-faint ease-out-quart hover:text-foreground hover:decoration-foreground mt-5 text-[13px] underline decoration-from-font underline-offset-[3px] transition-colors duration-150"
-      >
-        Documentation
-      </a>
+      <div className="mt-5 flex justify-center">
+        <a
+          href="#installation"
+          className="text-muted decoration-faint ease-out-quart hover:text-foreground hover:decoration-foreground text-[13px] underline decoration-from-font underline-offset-[3px] transition-colors duration-150"
+        >
+          Documentation
+        </a>
+      </div>
     </header>
   );
 }

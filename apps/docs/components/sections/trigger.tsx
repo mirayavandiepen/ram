@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import { Code } from "../code";
 import { Preview, Sample } from "../preview";
-import { PRESS } from "../press";
+import { BUTTON_SECONDARY, BUTTON_SM } from "../button";
 import { Section } from "../section";
 import { Segmented } from "../segmented";
 
@@ -64,7 +64,7 @@ export function Trigger() {
             <button
               type="button"
               onClick={() => setActive((a) => !a)}
-              className={`border-border bg-surface hover:bg-surface-hover h-7 rounded-full border px-3 text-[13px] leading-none ${PRESS}`}
+              className={`${BUTTON_SECONDARY} ${BUTTON_SM}`}
             >
               {active ? "Hide" : "Show"}
             </button>

@@ -23,6 +23,10 @@
   --primary: #3f3f3f;
   --primary-hover: #545454;
   --primary-foreground: #ffffff;
+  /* Two layers: a tight one that draws the contact edge and a softer one that
+     puts the control above the page. Transparent black, so it works over the
+     surface and the code background alike. */
+  --button-shadow: 0 1px 2px rgb(0 0 0 / 0.06), 0 1px 3px rgb(0 0 0 / 0.04);
   /* The one hue on the page. It marks names in the reference tables and
      nothing else, so a prop name is findable by colour alone. */
   --accent: #c2186f;
@@ -50,6 +54,9 @@
   --primary: #d8d8d8;
   --primary-hover: #eaeaea;
   --primary-foreground: #0a0a0a;
+  /* A cast shadow reads as nothing against near-black, so the dark theme
+     spends the depth on a rim of light along the top edge instead. */
+  --button-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04);
   --accent: #f77fc0;
 
   --tok-keyword: #a99ce6;
@@ -81,6 +88,7 @@
   --color-surface-hover: var(--surface-hover);
   --color-primary: var(--primary);
   --color-primary-hover: var(--primary-hover);
+  --shadow-button: var(--button-shadow);
   --color-primary-foreground: var(--primary-foreground);
   --color-accent: var(--accent);
 }
