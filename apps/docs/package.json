@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "pnpm --filter @mirayavandiepen/ram build && next build",
     "start": "next start",
     "typecheck": "tsc --noEmit"
   },
